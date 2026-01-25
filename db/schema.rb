@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_01_24_194703) do
+ActiveRecord::Schema[8.1].define(version: 2026_01_25_154210) do
+  create_table "campaigns", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "name"
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "campaigns_users", id: false, force: :cascade do |t|
+    t.integer "campaign_id", null: false
+    t.integer "user_id", null: false
+  end
+
   create_table "sessions", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "ip_address"
