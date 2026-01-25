@@ -15,7 +15,9 @@ Rails.application.routes.draw do
   # root "posts#index"
   root "campaigns#index"
 
-  resources :campaigns
+  resources :campaigns do
+    resources :locations
+  end
 
 
 end

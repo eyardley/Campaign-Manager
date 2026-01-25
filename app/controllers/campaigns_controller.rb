@@ -1,5 +1,6 @@
 class CampaignsController < ApplicationController
     before_action :set_campaign, only: %i[ show edit update destroy]
+    before_action :validate_user, only: %i[ show edit]
 
     def index
         @campaigns = Current.user.campaigns.all
@@ -43,6 +44,13 @@ class CampaignsController < ApplicationController
 
     def set_campaign
         @campaign = Campaign.find(params[:id])
+    end
+
+    def validate_user
+        @campaign = Campaign.find(params[:id])
+        if !@campaign.users.include? Current.user 
+            redirect_to campaigns_path
+        end
     end
 
     def campaign_params
