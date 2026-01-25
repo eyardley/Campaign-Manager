@@ -1,0 +1,11 @@
+<h1>Campaigns</h1>
+
+<%= link_to "New Campaign", new_campaign_path  %>
+
+<div id="campaigns">
+    <% @campaigns.each do |campaign| %>
+        <div>
+            <%= link_to campaign.name, campaign_path(campaign.id) %>
+        </div>
+    <% end %>
+</div>
