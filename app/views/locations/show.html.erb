@@ -1,0 +1,8 @@
+<div><%= link_to "Back", @campaign %></div>
+
+<h1><%= @location.name %></h1>
+
+<div>
+    <%= link_to "Edit", edit_campaign_location_path(@campaign, @location) %>
+    <%= button_to "Delete", [@campaign, @location], method: :delete, data: { turbo_confirm: "Are you sure?" } %>
+</div>

@@ -1,6 +1,20 @@
-<div><%= link_to "Back", campaigns_path %></div>
+<div>
+    <%= link_to "Back", campaigns_path %>
+</div>
 
 <h1><%= @campaign.name %></h1>
+
+<div>
+    <%= link_to "New Location", new_campaign_location_path(@campaign)  %>
+</div>
+
+<div id="locations">
+    <% @campaign.locations.each do |location| %>
+        <div>
+            <%= link_to location.name, campaign_location_path(@campaign.id, location.id) %>
+        </div>
+    <% end %>
+</div>
 
 <div>
     <%= link_to "Edit", edit_campaign_path(@campaign) %>

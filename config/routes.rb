@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   root "campaigns#index"
 
   resources :campaigns do
-    resources :locations
+    resources :locations, except: [:index]
   end
 
 
