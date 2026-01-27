@@ -4,14 +4,26 @@
 
 <h1><%= @campaign.name %></h1>
 
+<h2>Locations</h2>
 <div>
     <%= link_to "New Location", new_campaign_location_path(@campaign)  %>
 </div>
-
 <div id="locations">
     <% @campaign.locations.each do |location| %>
         <div>
             <%= link_to location.name, campaign_location_path(@campaign.id, location.id) %>
+        </div>
+    <% end %>
+</div>
+
+<h2>PCs</h2>
+<div>
+    <%= link_to "New Player Character", new_campaign_player_character_path(@campaign)  %>
+</div>
+<div id="player-characters">
+    <% @campaign.player_characters.each do |pc| %>
+        <div>
+            <%= link_to pc.name, campaign_player_character_path(@campaign.id, pc.id) %>
         </div>
     <% end %>
 </div>
