@@ -6,7 +6,6 @@ class PlayerCharactersController < ApplicationController
     end
 
     def new
-        @campaign = Campaign.find(params[:campaign_id])
         @pc = PlayerCharacter.new
     end
 

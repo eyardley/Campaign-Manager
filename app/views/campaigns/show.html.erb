@@ -4,6 +4,8 @@
 
 <h1><%= @campaign.name %></h1>
 
+<br><br>
+
 <h2>Locations</h2>
 <div>
     <%= link_to "New Location", new_campaign_location_path(@campaign)  %>
@@ -16,6 +18,8 @@
     <% end %>
 </div>
 
+<br><br>
+
 <h2>PCs</h2>
 <div>
     <%= link_to "New Player Character", new_campaign_player_character_path(@campaign)  %>
@@ -27,6 +31,22 @@
         </div>
     <% end %>
 </div>
+
+<br><br>
+
+<h2>NPCs</h2>
+<div>
+    <%= link_to "New NPC", new_campaign_non_player_character_path(@campaign)  %>
+</div>
+<div id="npcs">
+    <% @campaign.non_player_characters.each do |npc| %>
+        <div>
+            <%= link_to npc.name, campaign_non_player_character_path(@campaign.id, npc.id) %>
+        </div>
+    <% end %>
+</div>
+
+<br><br>
 
 <div>
     <%= link_to "Edit", edit_campaign_path(@campaign) %>

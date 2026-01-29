@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   resources :campaigns do
     resources :locations, except: [:index]
     resources :player_characters, except: [:index]
+    resources :non_player_characters, except: [:index]
   end
 
 

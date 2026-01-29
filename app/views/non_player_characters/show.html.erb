@@ -1,0 +1,8 @@
+<div><%= link_to "Back", @campaign %></div>
+
+<h1><%= @npc.name %></h1>
+
+<div>
+    <%= link_to "Edit", edit_campaign_non_player_character_path(@campaign, @npc) %>
+    <%= button_to "Delete", [@campaign, @npc], method: :delete, data: { turbo_confirm: "Are you sure?" } %>
+</div>

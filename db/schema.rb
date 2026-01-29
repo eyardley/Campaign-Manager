@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_01_27_042604) do
+ActiveRecord::Schema[8.1].define(version: 2026_01_29_022109) do
   create_table "campaigns", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "name"
@@ -28,6 +28,14 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_27_042604) do
     t.string "name"
     t.datetime "updated_at", null: false
     t.index ["campaign_id"], name: "index_locations_on_campaign_id"
+  end
+
+  create_table "non_player_characters", force: :cascade do |t|
+    t.integer "campaign_id", null: false
+    t.datetime "created_at", null: false
+    t.string "name"
+    t.datetime "updated_at", null: false
+    t.index ["campaign_id"], name: "index_non_player_characters_on_campaign_id"
   end
 
   create_table "player_characters", force: :cascade do |t|
@@ -58,6 +66,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_27_042604) do
   end
 
   add_foreign_key "locations", "campaigns"
+  add_foreign_key "non_player_characters", "campaigns"
   add_foreign_key "player_characters", "campaigns"
   add_foreign_key "player_characters", "users"
   add_foreign_key "sessions", "users"
