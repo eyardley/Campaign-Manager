@@ -49,7 +49,7 @@ class LocationsController < ApplicationController
     end
 
     def location_params
-        params.expect(location: [:name])
+        params.expect(location: [:name, :description, :notes, :featured_image])
     end
 
 end
