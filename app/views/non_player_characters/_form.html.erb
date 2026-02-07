@@ -8,6 +8,8 @@
         <%= form.text_field :name %>
     </div>
 
+    <%= form.collection_checkboxes :location_ids, @campaign.locations, :id, :name %>
+
     <div>
         <%= form.submit %>
     </div>

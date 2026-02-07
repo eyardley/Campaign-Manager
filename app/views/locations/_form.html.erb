@@ -23,6 +23,8 @@
         <%= form.rich_textarea :notes %>
     </div>
 
+    <%= form.collection_checkboxes :non_player_character_ids, @campaign.non_player_characters, :id, :name  %>
+
     <div>
         <%= form.submit %>
     </div>

@@ -2,6 +2,15 @@
 
 <h1><%= @npc.name %></h1>
 
+<h2>Locations</h2>
+<div id="locations">
+    <% @npc.locations.each do |location| %>
+        <div>
+            <%= link_to location.name, campaign_location_path(@campaign.id, location.id) %>
+        </div>
+    <% end %>
+</div>
+
 <div>
     <%= link_to "Edit", edit_campaign_non_player_character_path(@campaign, @npc) %>
     <%= button_to "Delete", [@campaign, @npc], method: :delete, data: { turbo_confirm: "Are you sure?" } %>

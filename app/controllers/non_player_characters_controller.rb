@@ -12,7 +12,6 @@ class NonPlayerCharactersController < ApplicationController
     def create
         @npc = NonPlayerCharacter.new(npc_params)
         @npc.campaign = @campaign
-
         if @npc.save
             redirect_to campaign_non_player_character_path(@campaign, @npc)
         else
@@ -44,7 +43,19 @@ class NonPlayerCharactersController < ApplicationController
     end
 
     def npc_params
-        params.expect(non_player_character: [:name])
+        params.expect(non_player_character: [:name, :location_ids])
+    end
+
+    def associate_locations(npc)
+        locations = params[:non_player_character][:locations]
+                    .filter {|location_id| location_id != ""}
+                    .map {|location_id| Location.find(location_id)}
+        locations.each do |location|
+            if !npc.locations.include? location
+                npc.locations << location
+            end
+        end
+
     end
 
 end
