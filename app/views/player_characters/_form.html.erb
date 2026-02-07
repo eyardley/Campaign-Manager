@@ -9,6 +9,21 @@
     </div>
 
     <div>
+        <%= form.label :featured_image, style: "display: block" %>
+        <%= form.file_field :featured_image, accept: "image/*" %>
+    </div>
+
+    <div>
+        <%= form.label :description, style: "display: block" %>
+        <%= form.rich_textarea :description %>
+    </div>
+
+    <div>
+        <%= form.label :notes, style: "display: block" %>
+        <%= form.rich_textarea :notes %>
+    </div>
+
+    <div>
         <%= form.submit %>
     </div>
 <% end %>

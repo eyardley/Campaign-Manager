@@ -43,7 +43,7 @@ class NonPlayerCharactersController < ApplicationController
     end
 
     def npc_params
-        params.expect(non_player_character: [:name, :location_ids])
+        params.expect(non_player_character: [:name, :description, :notes, :featured_image, :location_ids])
     end
 
     def associate_locations(npc)

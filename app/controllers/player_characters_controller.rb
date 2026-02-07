@@ -48,7 +48,7 @@ class PlayerCharactersController < ApplicationController
     end
 
     def pc_params
-        params.expect(player_character: [:name])
+        params.expect(player_character: [:name, :description, :notes, :featured_image])
     end
 
 end

@@ -3,6 +3,18 @@
 <h1><%= @pc.name %></h1>
 
 <div>
+    <%= image_tag @pc.featured_image if @pc.featured_image.attached? %>
+</div>
+
+<div>
+    <p><%= @pc.description %></p>
+</div>
+
+<div>
+    <p><%= @pc.notes %></p>
+</div>
+
+<div>
     <%= link_to "Edit", edit_campaign_player_character_path(@campaign, @pc) %>
     <%= button_to "Delete", [@campaign, @pc], method: :delete, data: { turbo_confirm: "Are you sure?" } %>
 </div>

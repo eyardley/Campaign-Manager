@@ -2,6 +2,18 @@
 
 <h1><%= @npc.name %></h1>
 
+<div>
+    <%= image_tag @npc.featured_image if @npc.featured_image.attached? %>
+</div>
+
+<div>
+    <p><%= @npc.description %></p>
+</div>
+
+<div>
+    <p><%= @npc.notes %></p>
+</div>
+
 <h2>Locations</h2>
 <div id="locations">
     <% @npc.locations.each do |location| %>
