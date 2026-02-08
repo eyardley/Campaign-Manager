@@ -10,9 +10,11 @@
     <p><%= @location.description %></p>
 </div>
 
+<% if @is_game_master %>
 <div>
     <p><%= @location.notes %></p>
 </div>
+<% end %>
 
 <h2>NPCs</h2>
 <div id="npcs">
@@ -23,7 +25,9 @@
     <% end %>
 </div>
 
-<div>
-    <%= link_to "Edit", edit_campaign_location_path(@campaign, @location) %>
-    <%= button_to "Delete", [@campaign, @location], method: :delete, data: { turbo_confirm: "Are you sure?" } %>
-</div>
+<% if @is_game_master %>
+    <div>
+        <%= link_to "Edit", edit_campaign_location_path(@campaign, @location) %>
+        <%= button_to "Delete", [@campaign, @location], method: :delete, data: { turbo_confirm: "Are you sure?" } %>
+    </div>
+<% end %>

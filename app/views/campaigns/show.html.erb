@@ -7,9 +7,11 @@
 <br><br>
 
 <h2>Locations</h2>
-<div>
-    <%= link_to "New Location", new_campaign_location_path(@campaign)  %>
-</div>
+<% if @is_game_master %>
+    <div>
+        <%= link_to "New Location", new_campaign_location_path(@campaign)  %>
+    </div>
+<% end %>
 <div id="locations">
     <% @campaign.locations.each do |location| %>
         <div>
@@ -35,9 +37,11 @@
 <br><br>
 
 <h2>NPCs</h2>
-<div>
-    <%= link_to "New NPC", new_campaign_non_player_character_path(@campaign)  %>
-</div>
+<% if @is_game_master %>
+    <div>
+        <%= link_to "New NPC", new_campaign_non_player_character_path(@campaign)  %>
+    </div>
+<% end %>
 <div id="npcs">
     <% @campaign.non_player_characters.each do |npc| %>
         <div>
@@ -48,7 +52,9 @@
 
 <br><br>
 
-<div>
-    <%= link_to "Edit", edit_campaign_path(@campaign) %>
-    <%= button_to "Delete", @campaign, method: :delete, data: { turbo_confirm: "Are you sure?" } %>
-</div>
+<% if @is_game_master %>
+    <div>
+        <%= link_to "Edit", edit_campaign_path(@campaign) %>
+        <%= button_to "Delete", @campaign, method: :delete, data: { turbo_confirm: "Are you sure?" } %>
+    </div>
+<% end %>

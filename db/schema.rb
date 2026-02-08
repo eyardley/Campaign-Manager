@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_02_07_171859) do
+ActiveRecord::Schema[8.1].define(version: 2026_02_08_004532) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -53,6 +53,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_07_171859) do
     t.datetime "created_at", null: false
     t.string "name"
     t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_campaigns_on_user_id"
   end
 
   create_table "campaigns_users", id: false, force: :cascade do |t|
@@ -110,6 +112,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_07_171859) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "campaigns", "users"
   add_foreign_key "locations", "campaigns"
   add_foreign_key "non_player_characters", "campaigns"
   add_foreign_key "player_characters", "campaigns"

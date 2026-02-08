@@ -1,5 +1,5 @@
 class NonPlayerCharactersController < ApplicationController
-    before_action :set_campaign, only: %i[ show new create edit update destroy]
+    before_action :set_campaign
     before_action :set_npc, only: %i[ show edit update destroy]
 
     def show
@@ -36,6 +36,7 @@ class NonPlayerCharactersController < ApplicationController
 
     def set_campaign
         @campaign = Campaign.find(params[:campaign_id])
+        @is_game_master = @campaign.user_id == Current.user
     end
 
     def set_npc

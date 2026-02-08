@@ -8,3 +8,20 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+
+body {
+    background-color: #fbf5ef ;
+    color: #272744  ;
+    font-family: 'Papyrus', fantasy;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  padding: 10px;
+}
+
+.container div {
+  padding: 10px;
+  text-align: center;
+}

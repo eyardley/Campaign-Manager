@@ -1,5 +1,5 @@
 class LocationsController < ApplicationController
-    before_action :set_campaign, only: %i[ show new create edit update destroy]
+    before_action :set_campaign
     before_action :set_location, only: %i[ show edit update destroy]
 
 
@@ -42,6 +42,7 @@ class LocationsController < ApplicationController
 
     def set_campaign
         @campaign = Campaign.find(params[:campaign_id])
+        @is_game_master = @campaign.user_id == Current.user
     end
 
     def set_location
