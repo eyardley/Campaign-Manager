@@ -42,7 +42,7 @@ class LocationsController < ApplicationController
 
     def set_campaign
         @campaign = Campaign.find(params[:campaign_id])
-        @is_game_master = @campaign.user_id == Current.user
+        @is_game_master = @campaign.user_id == Current.user.id
     end
 
     def set_location

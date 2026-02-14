@@ -1,33 +1,45 @@
 <div><%= link_to "Back", @campaign %></div>
 
-<h1><%= @npc.name %></h1>
+<h1 class="text-center mb-4"><%= @npc.name %></h1>
 
-<div>
-    <%= image_tag @npc.featured_image if @npc.featured_image.attached? %>
-</div>
-
-<div>
-    <p><%= @npc.description %></p>
-</div>
-
-<% if @is_game_master %>
-    <div>
-        <p><%= @npc.notes %></p>
-    </div>
-<% end %>
-
-<h2>Locations</h2>
-<div id="locations">
-    <% @npc.locations.each do |location| %>
-        <div>
-            <%= link_to location.name, campaign_location_path(@campaign.id, location.id) %>
+<div class="row mb-4">
+    <div class="col">
+        <%= render "shared/text_block",
+          title: "Description",
+          field: @npc.description,
+          edit_path: edit_campaign_non_player_character_path(@campaign, @npc),
+          can_edit: @is_game_master %>
+        <div class="row">
+            <%= @npc.description %>
         </div>
-    <% end %>
+        <% if @is_game_master %>
+            <%= render "shared/text_block",
+              title: "Notes",
+              field: @npc.notes,
+              edit_path:  edit_campaign_non_player_character_path(@campaign, @npc),
+              can_edit: @is_game_master %>
+        <% end %>
+    </div>
+    <div class="col">
+        <div class="text-center">
+            <%= image_tag @npc.featured_image if @npc.featured_image.attached? %>
+        </div>
+    </div>
+</div>
+
+<div class="row mb-md-4">
+    <div class="col-md-6">
+        <%= render "shared/table_list",
+          table_title: "Locations",
+          items: @npc.locations,
+          new_path:  new_campaign_location_path(@campaign),
+          can_edit: @is_game_master %>
+    </div>
 </div>
 
 <% if @is_game_master %>
     <div>
-        <%= link_to "Edit", edit_campaign_non_player_character_path(@campaign, @npc) %>
+        <%= link_to "Edit", edit_campaign_location_path(@campaign, @npc) %>
         <%= button_to "Delete", [@campaign, @npc], method: :delete, data: { turbo_confirm: "Are you sure?" } %>
     </div>
 <% end %>

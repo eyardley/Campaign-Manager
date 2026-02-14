@@ -1,0 +1,13 @@
+<div class="row align-items-center">
+    <div class="col">
+        <h2><%= title %></h2>
+    </div>
+    <% if can_edit %>
+        <div class="col-auto mt-3">
+            <%= link_to "Edit", edit_path %>
+        </div>
+    <% end %>
+</div>
+<div class="row">
+    <%= field %>
+</div>

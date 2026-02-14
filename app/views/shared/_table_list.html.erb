@@ -1,0 +1,28 @@
+<div class="row align-items-center">
+    <div class="col">
+        <h2><%= table_title %></h2>
+    </div>
+    <% if can_edit %>
+        <div class="col-auto mt-3">
+            <%= link_to "New #{table_title.singularize}", new_path %>
+        </div>
+    <% end %>
+</div>
+<div class="row">
+    <div class="col">
+        <table class="table table-striped">
+            <tbody>
+                <% items.each do |item| %>
+                        <tr>
+                            <td><%= link_to item.name, [@campaign, item] %></td>
+                            <% if can_edit %>
+                                <td class="text-end">
+                                    <%= link_to "Edit", [:edit, @campaign, item] %>
+                                </td>
+                            <% end %>
+                        </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+</div>

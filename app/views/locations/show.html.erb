@@ -1,28 +1,41 @@
 <div><%= link_to "Back", @campaign %></div>
 
-<h1><%= @location.name %></h1>
+<h1 class="text-center mb-4"><%= @location.name %></h1>
 
-<div>
-    <%= image_tag @location.featured_image if @location.featured_image.attached? %>
-</div>
-
-<div>
-    <p><%= @location.description %></p>
-</div>
-
-<% if @is_game_master %>
-<div>
-    <p><%= @location.notes %></p>
-</div>
-<% end %>
-
-<h2>NPCs</h2>
-<div id="npcs">
-    <% @location.non_player_characters.each do |npc| %>
-        <div>
-            <%= link_to npc.name, campaign_non_player_character_path(@campaign.id, npc.id) %>
+<div class="row mb-4">
+    <div class="col">
+        <%= render "shared/text_block",
+          title: "Description",
+          field: @location.description,
+          edit_path: edit_campaign_location_path(@campaign, @location),
+          can_edit: @is_game_master %>
+        <div class="row">
+            <%= @location.description %>
         </div>
-    <% end %>
+        <% if @is_game_master %>
+            <%= render "shared/text_block",
+              title: "Notes",
+              field: @location.notes,
+              edit_path: edit_campaign_location_path(@campaign, @location),
+
+              can_edit: @is_game_master %>
+        <% end %>
+    </div>
+    <div class="col">
+        <div class="text-center">
+            <%= image_tag @location.featured_image if @location.featured_image.attached? %>
+        </div>
+    </div>
+</div>
+
+<div class="row mb-md-4">
+    <div class="col-md-6">
+        <%= render "shared/table_list",
+          table_title: "NPCs",
+          items: @location.non_player_characters,
+          new_path:  new_campaign_non_player_character_path(@campaign),
+          can_edit: @is_game_master %>
+    </div>
 </div>
 
 <% if @is_game_master %>

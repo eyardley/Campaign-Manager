@@ -2,59 +2,70 @@
     <%= link_to "Back", campaigns_path %>
 </div>
 
-<h1><%= @campaign.name %></h1>
+<h1 class="text-center mb-4"><%= @campaign.name %></h1>
 
-<br><br>
-
-<h2>Locations</h2>
-<% if @is_game_master %>
-    <div>
-        <%= link_to "New Location", new_campaign_location_path(@campaign)  %>
-    </div>
-<% end %>
-<div id="locations">
-    <% @campaign.locations.each do |location| %>
-        <div>
-            <%= link_to location.name, campaign_location_path(@campaign.id, location.id) %>
+<div class="row mb-4">
+    <div class="col">
+        <%= render "shared/text_block",
+          title: "Description",
+          edit_path: edit_campaign_path(@campaign),
+          field: @campaign.description,
+          can_edit: @is_game_master %>
+        <div class="row">
+            <%= @campaign.description %>
         </div>
-    <% end %>
-</div>
-
-<br><br>
-
-<h2>PCs</h2>
-<div>
-    <%= link_to "New Player Character", new_campaign_player_character_path(@campaign)  %>
-</div>
-<div id="player-characters">
-    <% @campaign.player_characters.each do |pc| %>
-        <div>
-            <%= link_to pc.name, campaign_player_character_path(@campaign.id, pc.id) %>
-        </div>
-    <% end %>
-</div>
-
-<br><br>
-
-<h2>NPCs</h2>
-<% if @is_game_master %>
-    <div>
-        <%= link_to "New NPC", new_campaign_non_player_character_path(@campaign)  %>
+        <% if @is_game_master %>
+            <%= render "shared/text_block",
+              title: "Notes",
+              edit_path: edit_campaign_path(@campaign),
+              field: @campaign.notes,
+              can_edit: @is_game_master %>
+        <% end %>
     </div>
-<% end %>
-<div id="npcs">
-    <% @campaign.non_player_characters.each do |npc| %>
-        <div>
-            <%= link_to npc.name, campaign_non_player_character_path(@campaign.id, npc.id) %>
+    <div class="col">
+        <div class="text-center">
+            <%= image_tag @campaign.featured_image if @campaign.featured_image.attached? %>
         </div>
-    <% end %>
+    </div>
 </div>
 
-<br><br>
+<div class="row mb-md-4">
+    <div class="col-md-6">
+        <%= render "shared/table_list",
+          table_title: "Locations",
+          items: @campaign.locations,
+          new_path:  new_campaign_location_path(@campaign),
+          can_edit: @is_game_master %>
+    </div>
+    <div class="col-md-6">
+        <%= render "shared/table_list",
+          table_title: "NPCs",
+          items: @campaign.non_player_characters,
+          new_path:  new_campaign_non_player_character_path(@campaign),
+          can_edit: @is_game_master %>
+    </div>
+</div>
+
+<div class="row mb-md-4">
+    <div class="col-md-6">
+        <%= render "shared/table_list",
+          table_title: "PCs",
+          items: @campaign.player_characters,
+          new_path:  new_campaign_player_character_path(@campaign),
+          can_edit: @is_game_master %>
+    </div>
+</div>
+
+<br>
 
 <% if @is_game_master %>
-    <div>
-        <%= link_to "Edit", edit_campaign_path(@campaign) %>
-        <%= button_to "Delete", @campaign, method: :delete, data: { turbo_confirm: "Are you sure?" } %>
+    <div class="row">
+        <div class="col-6 text-end">
+            <%= link_to "Edit", [:edit, @campaign] %>
+        </div>
+        <div class="col-6">
+            <%= button_to "Delete", @campaign, method: :delete, data: { turbo_confirm: "Are you sure?" } %>
+        </div>
     </div>
+    <br>
 <% end %>

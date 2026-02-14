@@ -1,17 +1,30 @@
 <div><%= link_to "Back", @campaign %></div>
 
-<h1><%= @pc.name %></h1>
+<h1 class="text-center mb-4"><%= @pc.name %></h1>
 
-<div>
-    <%= image_tag @pc.featured_image if @pc.featured_image.attached? %>
-</div>
-
-<div>
-    <p><%= @pc.description %></p>
-</div>
-
-<div>
-    <p><%= @pc.notes %></p>
+<div class="row mb-4">
+    <div class="col">
+        <%= render "shared/text_block",
+          title: "Description",
+          field: @pc.description,
+          edit_path:  edit_campaign_player_character_path(@campaign, @pc),
+          can_edit: @is_game_master %>
+        <div class="row">
+            <%= @pc.description %>
+        </div>
+        <% if @is_game_master %>
+            <%= render "shared/text_block",
+              title: "Notes",
+              field: @pc.notes,
+              edit_path:  edit_campaign_player_character_path(@campaign, @pc),
+              can_edit: @is_game_master %>
+        <% end %>
+    </div>
+    <div class="col">
+        <div class="text-center">
+            <%= image_tag @pc.featured_image if @pc.featured_image.attached? %>
+        </div>
+    </div>
 </div>
 
 <div>
