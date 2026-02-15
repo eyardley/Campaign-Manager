@@ -27,8 +27,14 @@
   </head>
 
   <body>
-    <div id="content" class="container">
-      <%= yield %>
-    </div>
+      <div id="content" class="container">
+        <nav>
+            <%= link_to "Home", root_path %>
+            <%= button_to "Log out", session_path, method: :delete if authenticated? %>
+        </nav>
+        <main>
+            <%= yield %>
+        </main>
+      </div>
   </body>
 </html>
