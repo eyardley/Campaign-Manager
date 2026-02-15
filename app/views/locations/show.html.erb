@@ -9,32 +9,35 @@
           field: @location.description,
           edit_path: edit_campaign_location_path(@campaign, @location),
           can_edit: @is_game_master %>
-        <div class="row">
-            <%= @location.description %>
-        </div>
+
         <% if @is_game_master %>
             <%= render "shared/text_block",
               title: "Notes",
               field: @location.notes,
               edit_path: edit_campaign_location_path(@campaign, @location),
-
               can_edit: @is_game_master %>
         <% end %>
     </div>
     <div class="col">
-        <div class="text-center">
+        <div class="row text-center">
             <%= image_tag @location.featured_image if @location.featured_image.attached? %>
         </div>
-    </div>
-</div>
 
-<div class="row mb-md-4">
-    <div class="col-md-6">
-        <%= render "shared/table_list",
-          table_title: "NPCs",
-          items: @location.non_player_characters,
-          new_path:  new_campaign_non_player_character_path(@campaign),
-          can_edit: @is_game_master %>
+        <% if !@location.related(Location).empty? %>
+            <%= render "shared/table_list",
+            table_title: "Related Locations",
+            items: @location.related(Location),
+            new_path:  new_campaign_location_path(@campaign),
+            can_edit: @is_game_master %>
+        <% end %>
+
+        <% if !@location.related(NonPlayerCharacter).empty? %>
+            <%= render "shared/table_list",
+            table_title: "Related NPCs",
+            items: @location.related(NonPlayerCharacter),
+            new_path:  new_campaign_non_player_character_path(@campaign),
+            can_edit: @is_game_master %>
+         <% end %>
     </div>
 </div>
 

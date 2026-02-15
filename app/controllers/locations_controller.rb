@@ -1,7 +1,6 @@
 class LocationsController < ApplicationController
     before_action :set_campaign
-    before_action :set_location, only: %i[ show edit update destroy]
-
+    before_action :set_location, only: %i[ show edit update destroy ]
 
     def show
     end
@@ -21,7 +20,7 @@ class LocationsController < ApplicationController
             render :new, status: :unprocessable_entity
         end
     end
-    
+
     def edit
     end
 
@@ -50,18 +49,6 @@ class LocationsController < ApplicationController
     end
 
     def location_params
-        params.expect(location: [:name, :description, :notes, :featured_image, :non_player_character_ids])
+        params.expect(location: [:name, :description, :notes, :featured_image, related_npc_ids: [], related_location_ids: []])
     end
-
-    def associate_npcs(location)
-        npcs = params[:location][:non_player_characters]
-               .filter {|npc_id| npc_id != ""}
-               .map {|npc_id| NonPlayerCharacter.find(npc_id)}
-        npcs.each do |npc|
-            if !location.non_player_characters.include? npc
-                location.non_player_characters << npc
-            end
-        end
-    end
-
 end

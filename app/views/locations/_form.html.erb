@@ -1,8 +1,14 @@
 <%= form_with model: [campaign, location] do |form| %>
     <%= render layout: 'shared/form_fields', locals: { form: form } do %>
-        <div class="container">
-            <%= form.collection_checkboxes :non_player_character_ids, @campaign.non_player_characters, :id, :name %>
+        <div class="mb-md-4">
+            <%= form.label "Related Npcs", class: "form-label" %>
+            <%= form.collection_checkboxes :related_npc_ids, @campaign.non_player_characters, :id, :name %>
         </div>
-        <br>
+
+        <div class="mb-md-4">
+            <%= form.label "Related locations", class: "form-label" %>
+            <%= form.collection_checkboxes :related_location_ids, @campaign.locations.select{|l| l != @location}, :id, :name %>
+        </div>
+
     <% end %>
 <% end %>

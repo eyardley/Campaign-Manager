@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_02_08_004532) do
+ActiveRecord::Schema[8.1].define(version: 2026_02_15_004609) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -70,11 +70,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_08_004532) do
     t.index ["campaign_id"], name: "index_locations_on_campaign_id"
   end
 
-  create_table "locations_non_player_characters", id: false, force: :cascade do |t|
-    t.integer "location_id", null: false
-    t.integer "non_player_character_id", null: false
-  end
-
   create_table "non_player_characters", force: :cascade do |t|
     t.integer "campaign_id", null: false
     t.datetime "created_at", null: false
@@ -91,6 +86,18 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_08_004532) do
     t.integer "user_id", null: false
     t.index ["campaign_id"], name: "index_player_characters_on_campaign_id"
     t.index ["user_id"], name: "index_player_characters_on_user_id"
+  end
+
+  create_table "relations", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "source_id", null: false
+    t.string "source_type", null: false
+    t.integer "target_id", null: false
+    t.string "target_type", null: false
+    t.datetime "updated_at", null: false
+    t.index ["source_type", "source_id", "target_type", "target_id"], name: "index_relations_uniqueness", unique: true
+    t.index ["source_type", "source_id"], name: "index_relations_on_source"
+    t.index ["target_type", "target_id"], name: "index_relations_on_target"
   end
 
   create_table "sessions", force: :cascade do |t|

@@ -9,9 +9,7 @@
           field: @npc.description,
           edit_path: edit_campaign_non_player_character_path(@campaign, @npc),
           can_edit: @is_game_master %>
-        <div class="row">
-            <%= @npc.description %>
-        </div>
+
         <% if @is_game_master %>
             <%= render "shared/text_block",
               title: "Notes",
@@ -21,25 +19,30 @@
         <% end %>
     </div>
     <div class="col">
-        <div class="text-center">
+        <div class="row text-center">
             <%= image_tag @npc.featured_image if @npc.featured_image.attached? %>
         </div>
-    </div>
-</div>
+        <% if !@npc.related(Location).empty? %>
+            <%= render "shared/table_list",
+            table_title: "Related Locations",
+            items: @npc.related(Location),
+            new_path:  new_campaign_location_path(@campaign),
+            can_edit: @is_game_master %>
+        <% end %>
 
-<div class="row mb-md-4">
-    <div class="col-md-6">
-        <%= render "shared/table_list",
-          table_title: "Locations",
-          items: @npc.locations,
-          new_path:  new_campaign_location_path(@campaign),
-          can_edit: @is_game_master %>
+        <% if !@npc.related(NonPlayerCharacter).empty? %>
+            <%= render "shared/table_list",
+            table_title: "Related NPCs",
+            items: @npc.related(NonPlayerCharacter),
+            new_path:  new_campaign_non_player_character_path(@campaign),
+            can_edit: @is_game_master %>
+         <% end %>
     </div>
 </div>
 
 <% if @is_game_master %>
     <div>
-        <%= link_to "Edit", edit_campaign_location_path(@campaign, @npc) %>
+        <%= link_to "Edit", edit_campaign_non_player_character_path(@campaign, @npc) %>
         <%= button_to "Delete", [@campaign, @npc], method: :delete, data: { turbo_confirm: "Are you sure?" } %>
     </div>
 <% end %>

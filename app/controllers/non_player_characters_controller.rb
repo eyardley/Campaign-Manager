@@ -1,6 +1,6 @@
 class NonPlayerCharactersController < ApplicationController
     before_action :set_campaign
-    before_action :set_npc, only: %i[ show edit update destroy]
+    before_action :set_npc, only: %i[ show edit update destroy ]
 
     def show
     end
@@ -44,19 +44,6 @@ class NonPlayerCharactersController < ApplicationController
     end
 
     def npc_params
-        params.expect(non_player_character: [:name, :description, :notes, :featured_image, :location_ids])
+        params.expect(non_player_character: [:name, :description, :notes, :featured_image, related_npc_ids: [], related_location_ids: []])
     end
-
-    def associate_locations(npc)
-        locations = params[:non_player_character][:locations]
-                    .filter {|location_id| location_id != ""}
-                    .map {|location_id| Location.find(location_id)}
-        locations.each do |location|
-            if !npc.locations.include? location
-                npc.locations << location
-            end
-        end
-
-    end
-
 end
