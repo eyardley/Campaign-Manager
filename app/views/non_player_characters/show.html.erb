@@ -26,6 +26,7 @@
             <%= render "shared/table_list",
             table_title: "Related Locations",
             items: @npc.related(Location),
+            parent: @campaign,
             new_path:  new_campaign_location_path(@campaign),
             can_edit: @is_game_master %>
         <% end %>
@@ -34,6 +35,7 @@
             <%= render "shared/table_list",
             table_title: "Related NPCs",
             items: @npc.related(NonPlayerCharacter),
+            parent: @campaign,
             new_path:  new_campaign_non_player_character_path(@campaign),
             can_edit: @is_game_master %>
          <% end %>

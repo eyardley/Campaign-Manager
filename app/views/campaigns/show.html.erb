@@ -34,6 +34,7 @@
         <%= render "shared/table_list",
           table_title: "Locations",
           items: @campaign.locations,
+          parent: @campaign,
           new_path:  new_campaign_location_path(@campaign),
           can_edit: @is_game_master %>
     </div>
@@ -41,6 +42,7 @@
         <%= render "shared/table_list",
           table_title: "NPCs",
           items: @campaign.non_player_characters,
+          parent: @campaign,
           new_path:  new_campaign_non_player_character_path(@campaign),
           can_edit: @is_game_master %>
     </div>
@@ -51,6 +53,7 @@
         <%= render "shared/table_list",
           table_title: "PCs",
           items: @campaign.player_characters,
+          parent: @campaign,
           new_path:  new_campaign_player_character_path(@campaign),
           can_edit: @is_game_master %>
     </div>

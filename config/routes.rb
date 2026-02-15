@@ -13,7 +13,11 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
-  root "campaigns#index"
+  root "dashboard#index"
+
+  resources :users do
+    resources :friendships, only: [:new, :create, :update]
+  end
 
   resources :campaigns do
     resources :locations, except: [:index]

@@ -1,0 +1,33 @@
+<div class="row mb-md-4">
+    <h1>Welcome to Campaign Manager</h1>
+</div>
+
+<div class="row mb-md-4">
+    <div class="col-md-6">
+        <%= render "shared/table_list",
+          table_title: "Campaigns",
+          items: @campaigns,
+          parent: nil,
+          new_path: new_campaign_path,
+          can_edit: true %>
+    </div>
+    <div class="col-md-6">
+        <%= render "shared/table_list",
+          table_title: "Friends",
+          items: @friends,
+          parent: nil,
+          new_path: new_user_friendship_path(Current.user.id),
+          can_edit: false %>
+    </div>
+</div>
+
+<div class="row mb-md-4">
+    <div class="col-md-6 offset-6">
+        <%= render "shared/table_list",
+          table_title: "Friend Requests",
+          items: @friend_requests,
+          parent: nil,
+          new_path: new_user_friendship_path(Current.user.id),
+          can_edit: true %>
+    </div>
+</div>

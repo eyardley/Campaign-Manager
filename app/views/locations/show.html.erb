@@ -7,6 +7,7 @@
         <%= render "shared/text_block",
           title: "Description",
           field: @location.description,
+          parent: @campaign,
           edit_path: edit_campaign_location_path(@campaign, @location),
           can_edit: @is_game_master %>
 
@@ -14,6 +15,7 @@
             <%= render "shared/text_block",
               title: "Notes",
               field: @location.notes,
+              parent: @campaign,
               edit_path: edit_campaign_location_path(@campaign, @location),
               can_edit: @is_game_master %>
         <% end %>
@@ -27,6 +29,7 @@
             <%= render "shared/table_list",
             table_title: "Related Locations",
             items: @location.related(Location),
+            parent: @campaign,
             new_path:  new_campaign_location_path(@campaign),
             can_edit: @is_game_master %>
         <% end %>
@@ -35,6 +38,7 @@
             <%= render "shared/table_list",
             table_title: "Related NPCs",
             items: @location.related(NonPlayerCharacter),
+            parent: @campaign,
             new_path:  new_campaign_non_player_character_path(@campaign),
             can_edit: @is_game_master %>
          <% end %>

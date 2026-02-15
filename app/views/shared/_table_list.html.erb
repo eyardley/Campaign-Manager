@@ -14,10 +14,10 @@
             <tbody>
                 <% items.each do |item| %>
                         <tr>
-                            <td><%= link_to item.name, [@campaign, item] %></td>
+                            <td><%= link_to item.name, [parent, item] %></td>
                             <% if can_edit %>
                                 <td class="text-end">
-                                    <%= link_to "Edit", [:edit, @campaign, item] %>
+                                    <%= link_to "Edit", [:edit, parent, item] %>
                                 </td>
                             <% end %>
                         </tr>
