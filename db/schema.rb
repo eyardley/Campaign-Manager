@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_02_15_004609) do
+ActiveRecord::Schema[8.1].define(version: 2026_02_15_182726) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -60,6 +60,17 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_15_004609) do
   create_table "campaigns_users", id: false, force: :cascade do |t|
     t.integer "campaign_id", null: false
     t.integer "user_id", null: false
+  end
+
+  create_table "friendships", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "friend_id", null: false
+    t.string "status", default: "pending", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["friend_id"], name: "index_friendships_on_friend_id"
+    t.index ["user_id", "friend_id"], name: "index_friendships_on_user_id_and_friend_id", unique: true
+    t.index ["user_id"], name: "index_friendships_on_user_id"
   end
 
   create_table "locations", force: :cascade do |t|
@@ -120,6 +131,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_15_004609) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "campaigns", "users"
+  add_foreign_key "friendships", "users"
+  add_foreign_key "friendships", "users", column: "friend_id"
   add_foreign_key "locations", "campaigns"
   add_foreign_key "non_player_characters", "campaigns"
   add_foreign_key "player_characters", "campaigns"
