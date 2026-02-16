@@ -6,6 +6,7 @@ class FriendshipsController < ApplicationController
   end
 
   def create
+
   end
 
   def update
