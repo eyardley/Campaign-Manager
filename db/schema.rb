@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_02_15_182726) do
+ActiveRecord::Schema[8.1].define(version: 2026_02_16_193321) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -63,6 +63,26 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_15_182726) do
   create_table "campaigns_users", id: false, force: :cascade do |t|
     t.integer "campaign_id", null: false
     t.integer "user_id", null: false
+  end
+
+  create_table "character_sheet_templates", force: :cascade do |t|
+    t.bigint "campaign_id", null: false
+    t.datetime "created_at", null: false
+    t.jsonb "data", default: {}
+    t.string "name"
+    t.string "type"
+    t.datetime "updated_at", null: false
+    t.index ["campaign_id"], name: "index_character_sheet_templates_on_campaign_id"
+  end
+
+  create_table "character_sheets", force: :cascade do |t|
+    t.bigint "character_sheet_template_id", null: false
+    t.datetime "created_at", null: false
+    t.jsonb "data", default: {}
+    t.bigint "player_character_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["character_sheet_template_id"], name: "index_character_sheets_on_character_sheet_template_id"
+    t.index ["player_character_id"], name: "index_character_sheets_on_player_character_id"
   end
 
   create_table "friendships", force: :cascade do |t|
@@ -134,6 +154,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_15_182726) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "campaigns", "users"
+  add_foreign_key "character_sheet_templates", "campaigns"
+  add_foreign_key "character_sheets", "character_sheet_templates"
+  add_foreign_key "character_sheets", "player_characters"
   add_foreign_key "friendships", "users"
   add_foreign_key "friendships", "users", column: "friend_id"
   add_foreign_key "locations", "campaigns"
