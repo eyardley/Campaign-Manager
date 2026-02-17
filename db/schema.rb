@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_02_16_193321) do
+ActiveRecord::Schema[8.1].define(version: 2026_02_16_230906) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -70,7 +70,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_16_193321) do
     t.datetime "created_at", null: false
     t.jsonb "data", default: {}
     t.string "name"
-    t.string "type"
+    t.string "sheet_type"
     t.datetime "updated_at", null: false
     t.index ["campaign_id"], name: "index_character_sheet_templates_on_campaign_id"
   end

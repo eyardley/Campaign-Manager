@@ -1,4 +1,4 @@
 class CharacterSheetTemplate < ApplicationRecord
   belongs_to :campaign
-  belongs_to :character_sheet
+  has_many :character_sheets, dependent: :destroy
 end

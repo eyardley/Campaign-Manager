@@ -4,6 +4,16 @@
 
 <h1 class="text-center mb-4"><%= @campaign.name %></h1>
 
+<% if @campaign.character_sheet_template == nil %>
+  <div class="row mb-4">
+      <%= link_to "Add Character Sheet Template", new_campaign_character_sheet_template_path(@campaign) %>
+  </div>
+  <% else %>
+  <div class="row mb-4">
+      <%= link_to "View Character Sheet Template", campaign_character_sheet_template_path(@campaign, @campaign.character_sheet_template.id) %>
+  </div>
+<% end %>
+
 <div class="row mb-4">
     <div class="col">
         <%= render "shared/text_block",

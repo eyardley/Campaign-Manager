@@ -1,4 +1,4 @@
 class CharacterSheet < ApplicationRecord
-  belongs_to :player
-  has_one :character_sheet_template
+  belongs_to :player_character
+  belongs_to :character_sheet_template
 end

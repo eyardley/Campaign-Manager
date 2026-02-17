@@ -10,15 +10,12 @@
  */
 
 body {
-    background-color: darkgray ;
-    color: #272744  ;
-    font-family: 'Papyrus', fantasy;
+    background-color: #544e68;
 }
 
 body .container#content {
-    background-color: #fbf5ef ;
-    color: #272744  ;
-    font-family: 'Papyrus', fantasy;
+    background-color: #f2d3ab;
+    color: #0d2b45;
 }
 
 label {
@@ -26,7 +23,7 @@ label {
 }
 
 .box {
-  outline-style: solid;
-  outline-width: thin;
-  outline-offset: 5px;
+    outline-style: solid;
+    outline-width: thin;
+    outline-offset: 5px;
 }

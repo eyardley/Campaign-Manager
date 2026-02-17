@@ -23,7 +23,6 @@ Rails.application.routes.draw do
     resources :locations, except: [:index]
     resources :player_characters, except: [:index]
     resources :non_player_characters, except: [:index]
+    resources :character_sheet_templates, except: [:index]
   end
-
-
 end

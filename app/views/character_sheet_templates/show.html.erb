@@ -1,0 +1,23 @@
+<div><%= link_to "Back", @campaign %></div>
+
+<h1 class="text-center mb-4"><%= @template.name %></h1>
+
+<h2>Fields</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Field Name</th>
+      <th>Field Type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @template.data.each do |name, type| %>
+      <tr>
+        <td><%= name %></td>
+        <td><%= type.capitalize %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+ <%= button_to "Delete", [@campaign, @template], method: :delete, data: { turbo_confirm: "Are you sure?" } %>
