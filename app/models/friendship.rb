@@ -10,5 +10,6 @@ class Friendship < ApplicationRecord
   def no_reverse_friendship
     if Friendship.where(user: friend, friend: user).exists?
       errors.add(:base, "A friendship with this user already exists")
+    end
   end
 end
