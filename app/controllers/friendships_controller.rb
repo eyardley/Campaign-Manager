@@ -1,6 +1,6 @@
 class FriendshipsController < ApplicationController
   before_action :set_user
-  before_action :set_friendship, only: %i[ update ]
+  before_action :set_friendship, only: %i[ update destroy ]
 
   def new
       @friendship = Friendship.new
@@ -29,6 +29,11 @@ class FriendshipsController < ApplicationController
      else
        redirect_to root_path, alert: "Could not update friend request."
      end
+  end
+
+  def destroy
+    @friendship.destroy
+    redirect_to root_path, alert: "Friend removed."
   end
 
   private

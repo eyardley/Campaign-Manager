@@ -11,10 +11,8 @@ class User < ApplicationRecord
     Friendship.where(user: self).or(Friendship.where(friend: self))
   end
 
-  def friends()
-      friend_records.where(status: "accepted").map do |f|
-        f.user == self ? f.friend : f.user
-    end
+  def accepted_friendships()
+      friend_records.where(status: "accepted").includes(:user, :friend)
   end
 
   def friend_requests()

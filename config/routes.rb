@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   root "dashboard#index"
 
   resources :users do
-    resources :friendships, only: [:new, :create, :update]
+    resources :friendships, only: [:new, :create, :update, :destroy]
   end
 
   resources :campaigns do

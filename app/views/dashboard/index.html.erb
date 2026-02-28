@@ -20,9 +20,17 @@
         <div class="col">
             <table class="table table-striped">
                 <tbody>
-                    <% @friends.each do |friend| %>
+                    <% @friendships.each do |friendship| %>
                         <tr>
+                             <% friend = friendship.user == Current.user ? friendship.friend : friendship.user %>
+
                             <td><%= friend.email_address %></td>
+                            <td class="text-end">
+                                <%= button_to "Remove", user_friendship_path(Current.user, friendship),
+                                    method: :delete,
+                                    data: { turbo_confirm: "Are you sure?" },
+                                    class: "btn btn-sm btn-danger" %>
+                            </td>
                         </tr>
                     <% end %>
                 </tbody>

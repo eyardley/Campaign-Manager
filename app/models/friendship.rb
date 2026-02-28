@@ -4,7 +4,6 @@ class Friendship < ApplicationRecord
 
   validate :no_reverse_friendship, on: :create
 
-
   private
 
   def no_reverse_friendship
