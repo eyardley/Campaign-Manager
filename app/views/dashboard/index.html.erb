@@ -11,23 +11,59 @@
           new_path: new_campaign_path,
           can_edit: true %>
     </div>
-    <div class="col-md-6">
-        <%= render "shared/table_list",
-          table_title: "Friends",
-          items: @friends,
-          parent: nil,
-          new_path: new_user_friendship_path(Current.user.id),
-          can_edit: false %>
+    <div class="row align-items-center">
+        <div class="col">
+            <h2>Friends</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <table class="table table-striped">
+                <tbody>
+                    <% @friends.each do |friend| %>
+                        <tr>
+                            <td><%= friend.email_address %></td>
+                        </tr>
+                    <% end %>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 
 <div class="row mb-md-4">
     <div class="col-md-6 offset-6">
-        <%= render "shared/table_list",
-          table_title: "Friend Requests",
-          items: @friend_requests,
-          parent: nil,
-          new_path: new_user_friendship_path(Current.user.id),
-          can_edit: true %>
+        <div class="row align-items-center">
+            <div class="col">
+                <h2>Friend Requests</h2>
+            </div>
+                <div class="col-auto mt-3">
+                    <%= link_to "New Friend Request", new_user_friendship_path(Current.user.id) %>
+                </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <table class="table table-striped">
+                    <tbody>
+                        <% @friend_requests.each do |request| %>
+                            <tr>
+                                <td><%= request.user.email_address %> sent you a friend request!</td>
+                                <td class="text-end">
+                                    <%= button_to "Accept", user_friendship_path(Current.user, request),
+                                        method: :patch,
+                                        params: { friendship: { status: "accepted" } },
+                                        class: "btn btn-sm btn-success" %>
+
+                                    <%= button_to "Decline", user_friendship_path(Current.user, request),
+                                        method: :patch,
+                                        params: { friendship: { status: "declined" } },
+                                        class: "btn btn-sm btn-danger" %>
+                                </td>
+                            </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>

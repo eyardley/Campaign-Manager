@@ -18,6 +18,6 @@ class User < ApplicationRecord
   end
 
   def friend_requests()
-    Friendship.where(friend: self, status: "pending").map(&:user)
+    Friendship.where(friend: self, status: "pending")
   end
 end

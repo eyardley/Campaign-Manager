@@ -1,1 +1,28 @@
-Coming soon!
+<h1>New Friend Request</h1>
+
+<%= form_with url: new_user_friendship_path(@user), method: :get do |form| %>
+    <div class="mb-md-4">
+        <%= form.label "Find User", class: "form-label" %>
+        <%= form.text_field :query,  value: params[:query], class: "form-control", placeholder: "user@example.com" %>
+    </div>
+
+    <div class="mb-md-4">
+        <%= form.submit "Search",  class: "btn btn-primary" %>
+    </div>
+
+<% end %>
+
+<% if @results.present? %>
+    <%= form_with model: [Current.user, @friendship] do |form| %>
+        <% if form.object.errors.any? %>
+            <p class="error"><%= form.object.errors.full_messages.first %></p>
+        <% end %>
+        <div class="mb-md-4">
+            <%= form.label "Results", class: "form-label" %>
+            <%= form.select :friend_id, @results.map { |user| [user.email_address, user.id] } %>
+        </div>
+        <div class="mb-md-4">
+            <%= form.submit "Send Friend Request",  class: "btn btn-primary" %>
+        </div>
+    <% end %>
+<% end %>

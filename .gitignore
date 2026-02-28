@@ -33,3 +33,7 @@
 # Ignore key files for decrypting credentials and more.
 /config/*.key
 
+# Local planning and AI context files.
+/CLAUDE.md
+/projects/
+
