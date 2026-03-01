@@ -11,36 +11,38 @@
           new_path: new_campaign_path,
           can_edit: true %>
     </div>
-    <div class="row align-items-center">
-        <div class="col">
-            <h2>Friends</h2>
+    <div class="col-md-6">
+        <div class="row align-items-center">
+            <div class="col">
+                <h2>Friends</h2>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <table class="table table-striped">
-                <tbody>
-                    <% @friendships.each do |friendship| %>
-                        <tr>
-                             <% friend = friendship.user == Current.user ? friendship.friend : friendship.user %>
+        <div class="row">
+            <div class="col">
+                <table class="table table-striped">
+                    <tbody>
+                        <% @friendships.each do |friendship| %>
+                            <tr>
+                                <% friend = friendship.user == Current.user ? friendship.friend : friendship.user %>
 
-                            <td><%= friend.email_address %></td>
-                            <td class="text-end">
-                                <%= button_to "Remove", user_friendship_path(Current.user, friendship),
-                                    method: :delete,
-                                    data: { turbo_confirm: "Are you sure?" },
-                                    class: "btn btn-sm btn-danger" %>
-                            </td>
-                        </tr>
-                    <% end %>
-                </tbody>
-            </table>
+                                <td><%= friend.email_address %></td>
+                                <td class="text-end">
+                                    <%= button_to "Remove", user_friendship_path(Current.user, friendship),
+                                        method: :delete,
+                                        data: { turbo_confirm: "Are you sure?" },
+                                        class: "btn btn-sm btn-danger" %>
+                                </td>
+                            </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
 
 <div class="row mb-md-4">
-    <div class="col-md-6 offset-6">
+    <div class="col-md-6">
         <div class="row align-items-center">
             <div class="col">
                 <h2>Friend Requests</h2>
@@ -71,6 +73,41 @@
                         <% end %>
                     </tbody>
                 </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="col-md-6">
+            <div class="row align-items-center">
+                <div class="col">
+                    <h2>Campaign Invites</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <table class="table table-striped">
+                        <tbody>
+                            <% @campaign_invites.each do |invite| %>
+                                <tr>
+                                    <td>You have been invited to join <%= invite.campaign.name %>!</td>
+                                    <td class="text-end">
+                                    <td class="text-end">
+                                        <%= button_to "Accept", campaign_campaign_invite_path(invite.campaign_id, invite.id),
+                                            method: :patch,
+                                            params: { CampaignInvite: { status: "accepted" } },
+                                            class: "btn btn-sm btn-success" %>
+
+                                        <%= button_to "Decline", campaign_campaign_invite_path(invite.campaign_id, invite.id),
+                                            method: :patch,
+                                            params: { CampaignInvite: { status: "declined" } },
+                                            class: "btn btn-sm btn-danger" %>
+                                    </td>
+                                    </td>
+                                </tr>
+                            <% end %>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

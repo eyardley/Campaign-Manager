@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   end
 
   resources :campaigns do
+    resources :campaign_invites, only: [:new, :create, :update, :destroy]
     resources :locations, except: [:index]
     resources :player_characters, except: [:index]
     resources :non_player_characters, except: [:index]

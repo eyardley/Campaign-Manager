@@ -15,6 +15,10 @@
 <% end %>
 
 <div class="row mb-4">
+    <%= link_to "Invite Friends", new_campaign_campaign_invite_path(@campaign) %>
+</div>
+
+<div class="row mb-4">
     <div class="col">
         <%= render "shared/text_block",
           title: "Description",

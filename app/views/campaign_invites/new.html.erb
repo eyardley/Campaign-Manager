@@ -1,0 +1,41 @@
+<h1>Invite your friends to join <%= @campaign.name %>!</h1>
+
+<div class="row mb-md-4">
+    <div class="col-md-6">
+        <div class="row align-items-center">
+            <div class="col">
+                <h2>Pending Invites</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <table class="table table-striped">
+                    <tbody>
+                        <% @pending_invites.each do |invite| %>
+                            <tr>
+
+                                <td><%= invite.user.email_address %></td>
+                                <td class="text-end">
+                                    <%= button_to "Remove", campaign_campaign_invites_path(@campaign, invite),
+                                        method: :delete,
+                                        data: { turbo_confirm: "Are you sure?" },
+                                        class: "btn btn-sm btn-danger" %>
+                                </td>
+                            </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%= form_with url: campaign_campaign_invites_path(@campaign) do |form| %>
+    <div class="mb-md-4">
+        <%= form.label :user_ids, "Friends", class: "form-label" %>
+        <%= form.collection_checkboxes :user_ids, @friends, :id, :email_address %>
+    </div>
+    <div class="mb-md-4">
+        <%= form.submit "Invite Friends",  class: "btn btn-primary" %>
+    </div>
+<% end %>

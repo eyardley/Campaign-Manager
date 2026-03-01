@@ -17,14 +17,14 @@ class CampaignsController < ApplicationController
     def create
         @campaign = Campaign.new(campaign_params)
         @campaign.users << Current.user
-        @campaign.user_id = Current.user.id
+        @campaign.game_master = Current.user
         if @campaign.save
             redirect_to @campaign
         else
             render :new, status: :unprocessable_entity
         end
     end
-    
+
     def edit
     end
 
@@ -36,7 +36,7 @@ class CampaignsController < ApplicationController
             render :edit, status: :unprocessable_entity
         end
     end
-    
+
     def destroy
         @campaign.destroy
         redirect_to campaigns_path
@@ -46,21 +46,21 @@ class CampaignsController < ApplicationController
 
     def set_campaign
         @campaign = Campaign.find(params[:id])
-        @is_game_master = @campaign.user_id == Current.user.id
+        @is_game_master = @campaign.game_master_id == Current.user.id
         print @is_game_master
     end
 
     def validate_user
         @campaign = Campaign.find(params[:id])
-        if !@campaign.users.include? Current.user 
+        if !@campaign.users.include? Current.user
             redirect_to campaigns_path
         end
-        @is_game_master = @campaign.user_id == Current.user.id
+        @is_game_master = @campaign.game_master_id == Current.user.id
     end
 
     def validate_game_master
         @campaign = Campaign.find(params[:id])
-        if !@campaign.user_id == Current.user
+        if @campaign.game_master_id != Current.user.id
             redirect_to campaigns_path
         end
     end

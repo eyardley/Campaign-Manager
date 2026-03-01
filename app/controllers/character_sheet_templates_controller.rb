@@ -39,7 +39,7 @@ class CharacterSheetTemplatesController < ApplicationController
 
     def set_campaign
         @campaign = Campaign.find(params[:campaign_id])
-        @is_game_master = @campaign.user_id == Current.user.id
+        @is_game_master = @campaign.game_master_id == Current.user.id
     end
 
     def set_template

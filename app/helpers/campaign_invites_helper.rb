@@ -1,0 +1,2 @@
+module CampaignInvitesHelper
+end

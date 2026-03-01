@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_02_16_230906) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_01_021113) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -52,12 +52,22 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_16_230906) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "campaign_invites", force: :cascade do |t|
+    t.bigint "campaign_id", null: false
+    t.datetime "created_at", null: false
+    t.string "status"
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["campaign_id"], name: "index_campaign_invites_on_campaign_id"
+    t.index ["user_id"], name: "index_campaign_invites_on_user_id"
+  end
+
   create_table "campaigns", force: :cascade do |t|
     t.datetime "created_at", null: false
+    t.integer "game_master_id"
     t.string "name"
     t.datetime "updated_at", null: false
-    t.integer "user_id"
-    t.index ["user_id"], name: "index_campaigns_on_user_id"
+    t.index ["game_master_id"], name: "index_campaigns_on_game_master_id"
   end
 
   create_table "campaigns_users", id: false, force: :cascade do |t|
@@ -153,7 +163,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_16_230906) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "campaigns", "users"
+  add_foreign_key "campaign_invites", "campaigns"
+  add_foreign_key "campaign_invites", "users"
+  add_foreign_key "campaigns", "users", column: "game_master_id"
   add_foreign_key "character_sheet_templates", "campaigns"
   add_foreign_key "character_sheets", "character_sheet_templates"
   add_foreign_key "character_sheets", "player_characters"
