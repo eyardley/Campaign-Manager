@@ -20,4 +20,5 @@
   </tbody>
 </table>
 
+ <%= link_to "Edit", edit_campaign_character_sheet_template_path(@campaign, @template) %>
  <%= button_to "Delete", [@campaign, @template], method: :delete, data: { turbo_confirm: "Are you sure?" } %>

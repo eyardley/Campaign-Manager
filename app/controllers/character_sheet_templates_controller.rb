@@ -2,9 +2,6 @@ class CharacterSheetTemplatesController < ApplicationController
     before_action :set_campaign
     before_action :set_template, only: %i[ show edit update destroy ]
 
-    def show
-    end
-
     def new
         @template = CharacterSheetTemplate.new
     end
@@ -17,9 +14,6 @@ class CharacterSheetTemplatesController < ApplicationController
         else
             render :new, status: :unprocessable_entity
         end
-    end
-
-    def edit
     end
 
     def update
