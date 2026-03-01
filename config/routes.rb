@@ -22,7 +22,9 @@ Rails.application.routes.draw do
   resources :campaigns do
     resources :campaign_invites, only: [:new, :create, :update, :destroy]
     resources :locations, except: [:index]
-    resources :player_characters, except: [:index]
+    resources :player_characters, except: [:index] do
+      resources :character_sheets, except: [:index]
+    end
     resources :non_player_characters, except: [:index]
     resources :character_sheet_templates, except: [:index]
   end

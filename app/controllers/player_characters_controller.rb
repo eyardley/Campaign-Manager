@@ -3,6 +3,7 @@ class PlayerCharactersController < ApplicationController
     before_action :set_pc, only: %i[ show edit update destroy]
 
     def show
+      @sheet = @pc.character_sheet
     end
 
     def new
@@ -20,7 +21,7 @@ class PlayerCharactersController < ApplicationController
             render :new, status: :unprocessable_entity
         end
     end
-    
+
     def edit
     end
 

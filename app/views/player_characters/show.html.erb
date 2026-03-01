@@ -27,6 +27,41 @@
     </div>
 </div>
 
+<div class="row">
+    <div class="col-md-6">
+        <div class="row align-items-center">
+            <div class="col">
+                <h2>Character Sheets</h2>
+            </div>
+            <% if @sheet.present? %>
+                <div class="col-auto mt-3">
+                    <%= link_to "Edit Sheet", edit_campaign_player_character_character_sheet_path(@campaign, @pc, @sheet) %>
+                </div>
+            <% else %>
+                <div class="col-auto mt-3">
+                    <%= link_to "New Sheet", new_campaign_player_character_character_sheet_path(@campaign, @pc) %>
+                </div>
+            <% end %>
+        </div>
+        <% if @sheet.present? %>
+            <div class="row">
+                <div class="col">
+                    <table class="table table-striped">
+                        <tbody>
+                            <% @sheet.data.each do |name, field| %>
+                            <tr>
+                                <td><%= name %></td>
+                                <td><%= field["value"] %></td>
+                            </tr>
+                            <% end %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+         <% end %>
+    </div>
+</div>
+
 <div>
     <%= link_to "Edit", edit_campaign_player_character_path(@campaign, @pc) %>
     <%= button_to "Delete", [@campaign, @pc], method: :delete, data: { turbo_confirm: "Are you sure?" } %>
