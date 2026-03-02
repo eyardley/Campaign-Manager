@@ -28,11 +28,30 @@
 
   <body>
       <div id="content" class="container">
-        <nav>
-            <%= link_to "Home", root_path %>
-            <%= button_to "Log out", session_path, method: :delete if authenticated? %>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+            <div class="container-fluid">
+                <%= link_to "Campaign Manager", root_path, class: "navbar-brand" %>
+                <div class="d-flex">
+                <% if authenticated? %>
+                    <%= button_to "Log out", session_path, method: :delete, class: "btn btn-outline-light btn-sm" %>
+                <% end %>
+                </div>
+            </div>
         </nav>
         <main>
+            <% if flash[:alert] %>
+              <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <%= flash[:alert] %>
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+              </div>
+            <% end %>
+            <% if flash[:notice] %>
+              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <%= flash[:notice] %>
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+              </div>
+            <% end %>
+
             <%= yield %>
         </main>
       </div>

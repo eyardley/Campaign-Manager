@@ -10,19 +10,29 @@
 </div>
 <div class="row">
     <div class="col">
-        <table class="table table-striped">
-            <tbody>
-                <% items.each do |item| %>
-                        <tr>
-                            <td><%= link_to item.name, [parent, item] %></td>
-                            <% if can_edit %>
-                                <td class="text-end">
-                                    <%= link_to "Edit", [:edit, parent, item] %>
-                                </td>
-                            <% end %>
-                        </tr>
-                <% end %>
-            </tbody>
-        </table>
+        <% if items.empty? %>
+            <p class="text-muted fst-italic">No <%= table_title.downcase %> yet.</p>
+        <% else %>
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <% if can_edit %><th class="text-end">Actions</th><% end %>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% items.each do |item| %>
+                            <tr>
+                                <td><%= link_to item.name, [parent, item].compact %></td>
+                                <% if can_edit %>
+                                    <td class="text-end">
+                                        <%= link_to "Edit", [:edit, parent, item] %>
+                                    </td>
+                                <% end %>
+                            </tr>
+                    <% end %>
+                </tbody>
+            </table>
+        <% end %>
     </div>
 </div>

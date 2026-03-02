@@ -77,37 +77,33 @@
         </div>
     </div>
     <div class="col-md-6">
-        <div class="col-md-6">
-            <div class="row align-items-center">
-                <div class="col">
-                    <h2>Campaign Invites</h2>
-                </div>
+        <div class="row align-items-center">
+            <div class="col">
+                <h2>Campaign Invites</h2>
             </div>
-            <div class="row">
-                <div class="col">
-                    <table class="table table-striped">
-                        <tbody>
-                            <% @campaign_invites.each do |invite| %>
-                                <tr>
-                                    <td>You have been invited to join <%= invite.campaign.name %>!</td>
-                                    <td class="text-end">
-                                    <td class="text-end">
-                                        <%= button_to "Accept", campaign_campaign_invite_path(invite.campaign_id, invite.id),
-                                            method: :patch,
-                                            params: { CampaignInvite: { status: "accepted" } },
-                                            class: "btn btn-sm btn-success" %>
+        </div>
+        <div class="row">
+            <div class="col">
+                <table class="table table-striped">
+                    <tbody>
+                        <% @campaign_invites.each do |invite| %>
+                            <tr>
+                                <td>You have been invited to join <%= invite.campaign.name %>!</td>
+                                <td class="text-end">
+                                    <%= button_to "Accept", campaign_campaign_invite_path(invite.campaign_id, invite.id),
+                                        method: :patch,
+                                        params: { campaign_invite: { status: "accepted" } },
+                                        class: "btn btn-sm btn-success" %>
 
-                                        <%= button_to "Decline", campaign_campaign_invite_path(invite.campaign_id, invite.id),
-                                            method: :patch,
-                                            params: { CampaignInvite: { status: "declined" } },
-                                            class: "btn btn-sm btn-danger" %>
-                                    </td>
-                                    </td>
-                                </tr>
-                            <% end %>
-                        </tbody>
-                    </table>
-                </div>
+                                    <%= button_to "Decline", campaign_campaign_invite_path(invite.campaign_id, invite.id),
+                                        method: :patch,
+                                        params: { campaign_invite: { status: "declined" } },
+                                        class: "btn btn-sm btn-danger" %>
+                                </td>
+                            </tr>
+                        <% end %>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

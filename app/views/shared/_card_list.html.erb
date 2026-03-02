@@ -1,0 +1,24 @@
+<div class="row align-items-center">
+    <div class="col">
+        <h2><%= title %></h2>
+    </div>
+    <% if can_create %>
+        <div class="col-auto mt-3">
+            <%= link_to "New #{title.singularize}", new_path %>
+        </div>
+    <% end %>
+</div>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    <% items.each do |item| %>
+        <div class="col">
+            <%= render "shared/card",
+            item: item,
+            thumbnail_image: item.featured_image,
+            title: item.name,
+            short_description: item.description.to_plain_text.truncate(40),
+            can_edit:  can_edit,
+            can_delete: can_delete,
+            parent: parent %>
+        </div>
+  <% end %>
+</div>

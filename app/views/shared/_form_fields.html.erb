@@ -1,5 +1,5 @@
 <% if form.object.errors.any? %>
-    <p class="error"><%= form.object.errors.full_messages.first %></p>
+    <p class="alert alert-danger"><%= form.object.errors.full_messages.to_sentence %></p>
 <% end %>
 
 <div class="mb-md-4">
@@ -8,21 +8,21 @@
 </div>
 
 <div class="mb-md-4">
-    <%= form.label :featured_image, style: "display: block", class: "form-label" %>
+    <%= form.label :featured_image, class: "form-label" %>
     <%= form.file_field :featured_image, accept: "image/*", class: "form-control" %>
 </div>
 
 <br>
 
 <div class="mb-md-4">
-    <%= form.label :description, style: "display: block", class: "form-label" %>
+    <%= form.label :description, class: "form-label" %>
     <%= form.rich_textarea :description, class: "form-control" %>
 </div>
 
 <br>
 
 <div class="mb-md-4">
-    <%= form.label :notes, style: "display: block", class: "form-label" %>
+    <%= form.label :notes, class: "form-label" %>
     <%= form.rich_textarea :notes, class: "form-control" %>
 </div>
 

@@ -42,6 +42,6 @@ class CampaignInvitesController < ApplicationController
   end
 
   def invite_params
-    params.expect(CampaignInvite: [ :status ])
+    params.expect(campaign_invite: [ :status ])
   end
 end
