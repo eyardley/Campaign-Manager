@@ -20,10 +20,10 @@ class CampaignInvitesController < ApplicationController
 
   def update
     if @invite.update(invite_params)
-       redirect_to root_path, notice: "Invite updated."
-     else
+      redirect_to root_path, notice: "Invite updated."
+    else
        redirect_to root_path, alert: "Could not update invite."
-     end
+    end
   end
 
   def destroy
