@@ -16,28 +16,43 @@
             <div class="col">
                 <h2>Friends</h2>
             </div>
+            <div class="col-auto mt-3">
+                <%= link_to new_user_friendship_path(Current.user.id) do %>
+                    <i class="fa-solid fa-user-plus"></i> New Friend Request
+                <% end %>
+            </div>
         </div>
         <div class="row">
             <div class="col">
-                <table class="table table-striped">
-                    <tbody>
-                        <% @friendships.each do |friendship| %>
+                <% if @friendships.empty? %>
+                    <p class="text-muted fst-italic">No friends yet.</p>
+                <% else %>
+                    <table class="table table-striped table-hover">
+                        <thead>
                             <tr>
-                                <% friend = friendship.user == Current.user ? friendship.friend : friendship.user %>
-
-                                <td><%= friend.email_address %></td>
-                                <td class="text-end">
-                                    <%= button_to user_friendship_path(Current.user, friendship),
-                                        method: :delete,
-                                        data: { turbo_confirm: "Are you sure?" },
-                                        class: "btn btn-sm btn-danger" do %>
-                                        <i class="fa-solid fa-user-minus"></i> Remove
-                                    <% end %>
-                                </td>
+                                <th>Name</th>
+                                <th class="text-end">Actions</th>
                             </tr>
-                        <% end %>
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            <% @friendships.each do |friendship| %>
+                                <tr>
+                                    <% friend = friendship.user == Current.user ? friendship.friend : friendship.user %>
+
+                                    <td><%= friend.email_address %></td>
+                                    <td class="text-end">
+                                        <%= button_to user_friendship_path(Current.user, friendship),
+                                            method: :delete,
+                                            data: { turbo_confirm: "Are you sure?" },
+                                            class: "btn btn-sm btn-danger" do %>
+                                            <i class="fa-solid fa-user-minus"></i> Remove
+                                        <% end %>
+                                    </td>
+                                </tr>
+                            <% end %>
+                        </tbody>
+                    </table>
+                <% end %>
             </div>
         </div>
     </div>
@@ -47,75 +62,90 @@
     <div class="col-md-6">
         <div class="row align-items-center">
             <div class="col">
-                <h2>Friend Requests</h2>
+                <h2>Campaign Invites</h2>
             </div>
-                <div class="col-auto mt-3">
-                    <%= link_to new_user_friendship_path(Current.user.id) do %>
-                        <i class="fa-solid fa-user-plus"></i> New Friend Request
-                    <% end %>
-                </div>
         </div>
         <div class="row">
             <div class="col">
-                <table class="table table-striped">
-                    <tbody>
-                        <% @friend_requests.each do |request| %>
+                <% if @campaign_invites.empty? %>
+                    <p class="text-muted fst-italic">No campaign invites at this time.</p>
+                <% else %>
+                    <table class="table table-striped table-hover">
+                        <thead>
                             <tr>
-                                <td><%= request.user.email_address %> sent you a friend request!</td>
-                                <td class="text-end">
-                                    <%= button_to user_friendship_path(Current.user, request),
-                                        method: :patch,
-                                        params: { friendship: { status: "accepted" } },
-                                        class: "btn btn-sm btn-success" do %>
-                                        <i class="fa-solid fa-check"></i> Accept
-                                    <% end %>
-
-                                    <%= button_to user_friendship_path(Current.user, request),
-                                        method: :patch,
-                                        params: { friendship: { status: "declined" } },
-                                        class: "btn btn-sm btn-danger" do %>
-                                        <i class="fa-solid fa-xmark"></i> Decline
-                                    <% end %>
-                                </td>
+                                <th>Name</th>
+                                <th class="text-end">Actions</th>
                             </tr>
-                        <% end %>
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            <% @campaign_invites.each do |invite| %>
+                                <tr>
+                                    <td>You have been invited to join <%= invite.campaign.name %>!</td>
+                                    <td class="text-end">
+                                        <%= button_to campaign_campaign_invite_path(invite.campaign_id, invite.id),
+                                            method: :patch,
+                                            params: { campaign_invite: { status: "accepted" } },
+                                            class: "btn btn-sm btn-success" do %>
+                                            <i class="fa-solid fa-check"></i> Accept
+                                        <% end %>
+
+                                        <%= button_to campaign_campaign_invite_path(invite.campaign_id, invite.id),
+                                            method: :patch,
+                                            params: { campaign_invite: { status: "declined" } },
+                                            class: "btn btn-sm btn-danger" do %>
+                                            <i class="fa-solid fa-xmark"></i> Decline
+                                        <% end %>
+                                    </td>
+                                </tr>
+                            <% end %>
+                        </tbody>
+                    </table>
+                <% end %>
             </div>
         </div>
     </div>
     <div class="col-md-6">
         <div class="row align-items-center">
             <div class="col">
-                <h2>Campaign Invites</h2>
+                <h2>Friend Requests</h2>
             </div>
         </div>
         <div class="row">
             <div class="col">
-                <table class="table table-striped">
-                    <tbody>
-                        <% @campaign_invites.each do |invite| %>
+                <% if @friend_requests.empty? %>
+                    <p class="text-muted fst-italic">No friend requests at this time.</p>
+                <% else %>
+                    <table class="table table-striped table-hover">
+                        <thead>
                             <tr>
-                                <td>You have been invited to join <%= invite.campaign.name %>!</td>
-                                <td class="text-end">
-                                    <%= button_to campaign_campaign_invite_path(invite.campaign_id, invite.id),
-                                        method: :patch,
-                                        params: { campaign_invite: { status: "accepted" } },
-                                        class: "btn btn-sm btn-success" do %>
-                                        <i class="fa-solid fa-check"></i> Accept
-                                    <% end %>
-
-                                    <%= button_to campaign_campaign_invite_path(invite.campaign_id, invite.id),
-                                        method: :patch,
-                                        params: { campaign_invite: { status: "declined" } },
-                                        class: "btn btn-sm btn-danger" do %>
-                                        <i class="fa-solid fa-xmark"></i> Decline
-                                    <% end %>
-                                </td>
+                                <th>Name</th>
+                                <th class="text-end">Actions</th>
                             </tr>
-                        <% end %>
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            <% @friend_requests.each do |request| %>
+                                <tr>
+                                    <td><%= request.user.email_address %> sent you a friend request!</td>
+                                    <td class="text-end">
+                                        <%= button_to user_friendship_path(Current.user, request),
+                                            method: :patch,
+                                            params: { friendship: { status: "accepted" } },
+                                            class: "btn btn-sm btn-success" do %>
+                                            <i class="fa-solid fa-check"></i> Accept
+                                        <% end %>
+
+                                        <%= button_to user_friendship_path(Current.user, request),
+                                            method: :patch,
+                                            params: { friendship: { status: "declined" } },
+                                            class: "btn btn-sm btn-danger" do %>
+                                            <i class="fa-solid fa-xmark"></i> Decline
+                                        <% end %>
+                                    </td>
+                                </tr>
+                            <% end %>
+                        </tbody>
+                    </table>
+                <% end %>
             </div>
         </div>
     </div>

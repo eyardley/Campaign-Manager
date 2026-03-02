@@ -27,8 +27,15 @@
 
     <%= form.hidden_field :data, data: { "character-sheet-template-target": "data" } %>
 
-    <div class="mt-3">
-        <%= form.submit class: "btn btn-primary" %>
+    <div class="row mt-4">
+        <div class="col-6 text-end">
+            <%= form.submit class: "btn btn-primary" %>
+        </div>
+        <div class="col-6 mt-1">
+            <%= link_to "javascript:history.back()" do %>
+                Cancel
+            <% end %>
+        </div>
     </div>
 
 <% end %>

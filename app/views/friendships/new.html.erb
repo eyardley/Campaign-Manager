@@ -21,8 +21,15 @@
             <%= form.label "Results", class: "form-label" %>
             <%= form.select :friend_id, @results.map { |user| [user.email_address, user.id] } %>
         </div>
-        <div class="mb-md-4">
-            <%= form.submit "Send Friend Request",  class: "btn btn-primary" %>
+        <div class="row mt-4">
+            <div class="col-6 text-end">
+                <%= form.submit "Send Friend Request", class: "btn btn-primary" %>
+            </div>
+            <div class="col-6 mt-1">
+                <%= link_to "javascript:history.back()" do %>
+                    Cancel
+                <% end %>
+            </div>
         </div>
     <% end %>
 <% end %>

@@ -1,5 +1,5 @@
 <% if form.object.errors.any? %>
-    <p class="alert alert-danger"><%= form.object.errors.full_messages.to_sentence %></p>
+    <p class="alert alert-danger"><%= form.object.errors.full_messages.first %></p>
 <% end %>
 
 <div class="mb-md-4">
@@ -28,6 +28,13 @@
 
 <%= yield if block_given? %>
 
-<div>
-    <%= form.submit %>
+<div class="row mt-4">
+    <div class="col-6 text-end">
+        <%= form.submit class: "btn btn-primary" %>
+    </div>
+    <div class="col-6 mt-1">
+        <%= link_to "javascript:history.back()" do %>
+            Cancel
+        <% end %>
+    </div>
 </div>

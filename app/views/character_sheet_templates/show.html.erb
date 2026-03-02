@@ -20,9 +20,15 @@
   </tbody>
 </table>
 
- <%= link_to edit_campaign_character_sheet_template_path(@campaign, @template) do %>
-     <i class="fa-solid fa-pen-to-square"></i> Edit
- <% end %>
- <%= button_to [@campaign, @template], method: :delete, data: { turbo_confirm: "Are you sure?" } do %>
-     <i class="fa-solid fa-trash"></i> Delete
- <% end %>
+<div class="row mt-4">
+    <div class="col-6 text-end">
+        <%= link_to edit_campaign_character_sheet_template_path(@campaign, @template) do %>
+            <i class="fa-solid fa-pen-to-square"></i> Edit
+        <% end %>
+    </div>
+    <div class="col-6 mt-1">
+        <%= button_to [@campaign, @template], class: "btn btn-sm btn-danger", method: :delete, data: { turbo_confirm: "Are you sure?" } do %>
+            <i class="fa-solid fa-trash"></i> Delete
+        <% end %>
+    </div>
+</div>

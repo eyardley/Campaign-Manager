@@ -43,12 +43,16 @@
 </div>
 
 <% if @is_game_master %>
-    <div>
-        <%= link_to edit_campaign_non_player_character_path(@campaign, @npc) do %>
-            <i class="fa-solid fa-pen-to-square"></i> Edit
-        <% end %>
-        <%= button_to [@campaign, @npc], method: :delete, data: { turbo_confirm: "Are you sure?" } do %>
-            <i class="fa-solid fa-trash"></i> Delete
-        <% end %>
+    <div class="row md-mb-4">
+        <div class="col-6 text-end">
+            <%= link_to edit_campaign_non_player_character_path(@campaign, @npc) do %>
+                <i class="fa-solid fa-pen-to-square"></i> Edit
+            <% end %>
+        </div>
+        <div class="col-6">
+            <%= button_to [@campaign, @npc], class: "btn btn-sm btn-danger", method: :delete, data: { turbo_confirm: "Are you sure?" } do %>
+                <i class="fa-solid fa-trash"></i> Delete
+            <% end %>
+        </div>
     </div>
 <% end %>
