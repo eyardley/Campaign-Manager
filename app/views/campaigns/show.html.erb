@@ -1,21 +1,29 @@
 <div>
-    <%= link_to "Back", campaigns_path %>
+    <%= link_to campaigns_path do %>
+        <i class="fa-solid fa-arrow-left"></i> Back
+    <% end %>
 </div>
 
 <h1 class="text-center mb-4"><%= @campaign.name %></h1>
 
 <% if @campaign.character_sheet_template.present? %>
     <div class="row mb-4">
-        <%= link_to "View Character Sheet Template", campaign_character_sheet_template_path(@campaign, @campaign.character_sheet_template.id) %>
+        <%= link_to campaign_character_sheet_template_path(@campaign, @campaign.character_sheet_template.id) do %>
+            <i class="fa-solid fa-eye"></i> View Character Sheet Template
+        <% end %>
     </div>
   <% else %>
     <div class="row mb-4">
-        <%= link_to "Add Character Sheet Template", new_campaign_character_sheet_template_path(@campaign) %>
+        <%= link_to new_campaign_character_sheet_template_path(@campaign) do %>
+            <i class="fa-solid fa-plus"></i> Add Character Sheet Template
+        <% end %>
     </div>
 <% end %>
 
 <div class="row mb-4">
-    <%= link_to "Invite Friends", new_campaign_campaign_invite_path(@campaign) %>
+    <%= link_to new_campaign_campaign_invite_path(@campaign) do %>
+        <i class="fa-solid fa-envelope"></i> Invite Friends
+    <% end %>
 </div>
 
 <div class="row mb-4">
@@ -35,7 +43,7 @@
     </div>
     <div class="col">
         <div class="text-center row">
-            <%= image_tag @campaign.featured_image if @campaign.featured_image.attached? %>
+            <%= image_tag @campaign.featured_image, class: "img-fluid rounded" if @campaign.featured_image.attached? %>
         </div>
     </div>
 </div>
@@ -75,10 +83,14 @@
 <% if @is_game_master %>
     <div class="row">
         <div class="col-6 text-end">
-            <%= link_to "Edit", [:edit, @campaign] %>
+            <%= link_to [:edit, @campaign] do %>
+                <i class="fa-solid fa-pen-to-square"></i> Edit
+            <% end %>
         </div>
         <div class="col-6">
-            <%= button_to "Delete", @campaign, method: :delete, data: { turbo_confirm: "Are you sure?" } %>
+            <%= button_to @campaign, method: :delete, data: { turbo_confirm: "Are you sure?" } do %>
+                <i class="fa-solid fa-trash"></i> Delete
+            <% end %>
         </div>
     </div>
     <br>

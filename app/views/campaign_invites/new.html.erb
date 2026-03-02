@@ -16,10 +16,12 @@
 
                                 <td><%= invite.user.email_address %></td>
                                 <td class="text-end">
-                                    <%= button_to "Remove", campaign_campaign_invites_path(@campaign, invite),
+                                    <%= button_to campaign_campaign_invites_path(@campaign, invite),
                                         method: :delete,
                                         data: { turbo_confirm: "Are you sure?" },
-                                        class: "btn btn-sm btn-danger" %>
+                                        class: "btn btn-sm btn-danger" do %>
+                                        <i class="fa-solid fa-xmark"></i> Remove
+                                    <% end %>
                                 </td>
                             </tr>
                         <% end %>

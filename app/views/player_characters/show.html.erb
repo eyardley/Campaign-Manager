@@ -1,4 +1,4 @@
-<div><%= link_to "Back", @campaign %></div>
+<div><%= link_to @campaign do %><i class="fa-solid fa-arrow-left"></i> Back<% end %></div>
 
 <h1 class="text-center mb-4"><%= @pc.name %></h1>
 
@@ -35,11 +35,15 @@
             </div>
             <% if @sheet.present? %>
                 <div class="col-auto mt-3">
-                    <%= link_to "Edit Sheet", edit_campaign_player_character_character_sheet_path(@campaign, @pc, @sheet) %>
+                    <%= link_to edit_campaign_player_character_character_sheet_path(@campaign, @pc, @sheet) do %>
+                        <i class="fa-solid fa-pen-to-square"></i> Edit Sheet
+                    <% end %>
                 </div>
             <% else %>
                 <div class="col-auto mt-3">
-                    <%= link_to "New Sheet", new_campaign_player_character_character_sheet_path(@campaign, @pc) %>
+                    <%= link_to new_campaign_player_character_character_sheet_path(@campaign, @pc) do %>
+                        <i class="fa-solid fa-plus"></i> New Sheet
+                    <% end %>
                 </div>
             <% end %>
         </div>
@@ -63,6 +67,10 @@
 </div>
 
 <div>
-    <%= link_to "Edit", edit_campaign_player_character_path(@campaign, @pc) %>
-    <%= button_to "Delete", [@campaign, @pc], method: :delete, data: { turbo_confirm: "Are you sure?" } %>
+    <%= link_to edit_campaign_player_character_path(@campaign, @pc) do %>
+        <i class="fa-solid fa-pen-to-square"></i> Edit
+    <% end %>
+    <%= button_to [@campaign, @pc], method: :delete, data: { turbo_confirm: "Are you sure?" } do %>
+        <i class="fa-solid fa-trash"></i> Delete
+    <% end %>
 </div>

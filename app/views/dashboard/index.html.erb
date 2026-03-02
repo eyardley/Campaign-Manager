@@ -27,10 +27,12 @@
 
                                 <td><%= friend.email_address %></td>
                                 <td class="text-end">
-                                    <%= button_to "Remove", user_friendship_path(Current.user, friendship),
+                                    <%= button_to user_friendship_path(Current.user, friendship),
                                         method: :delete,
                                         data: { turbo_confirm: "Are you sure?" },
-                                        class: "btn btn-sm btn-danger" %>
+                                        class: "btn btn-sm btn-danger" do %>
+                                        <i class="fa-solid fa-user-minus"></i> Remove
+                                    <% end %>
                                 </td>
                             </tr>
                         <% end %>
@@ -48,7 +50,9 @@
                 <h2>Friend Requests</h2>
             </div>
                 <div class="col-auto mt-3">
-                    <%= link_to "New Friend Request", new_user_friendship_path(Current.user.id) %>
+                    <%= link_to new_user_friendship_path(Current.user.id) do %>
+                        <i class="fa-solid fa-user-plus"></i> New Friend Request
+                    <% end %>
                 </div>
         </div>
         <div class="row">
@@ -59,15 +63,19 @@
                             <tr>
                                 <td><%= request.user.email_address %> sent you a friend request!</td>
                                 <td class="text-end">
-                                    <%= button_to "Accept", user_friendship_path(Current.user, request),
+                                    <%= button_to user_friendship_path(Current.user, request),
                                         method: :patch,
                                         params: { friendship: { status: "accepted" } },
-                                        class: "btn btn-sm btn-success" %>
+                                        class: "btn btn-sm btn-success" do %>
+                                        <i class="fa-solid fa-check"></i> Accept
+                                    <% end %>
 
-                                    <%= button_to "Decline", user_friendship_path(Current.user, request),
+                                    <%= button_to user_friendship_path(Current.user, request),
                                         method: :patch,
                                         params: { friendship: { status: "declined" } },
-                                        class: "btn btn-sm btn-danger" %>
+                                        class: "btn btn-sm btn-danger" do %>
+                                        <i class="fa-solid fa-xmark"></i> Decline
+                                    <% end %>
                                 </td>
                             </tr>
                         <% end %>
@@ -90,15 +98,19 @@
                             <tr>
                                 <td>You have been invited to join <%= invite.campaign.name %>!</td>
                                 <td class="text-end">
-                                    <%= button_to "Accept", campaign_campaign_invite_path(invite.campaign_id, invite.id),
+                                    <%= button_to campaign_campaign_invite_path(invite.campaign_id, invite.id),
                                         method: :patch,
                                         params: { campaign_invite: { status: "accepted" } },
-                                        class: "btn btn-sm btn-success" %>
+                                        class: "btn btn-sm btn-success" do %>
+                                        <i class="fa-solid fa-check"></i> Accept
+                                    <% end %>
 
-                                    <%= button_to "Decline", campaign_campaign_invite_path(invite.campaign_id, invite.id),
+                                    <%= button_to campaign_campaign_invite_path(invite.campaign_id, invite.id),
                                         method: :patch,
                                         params: { campaign_invite: { status: "declined" } },
-                                        class: "btn btn-sm btn-danger" %>
+                                        class: "btn btn-sm btn-danger" do %>
+                                        <i class="fa-solid fa-xmark"></i> Decline
+                                    <% end %>
                                 </td>
                             </tr>
                         <% end %>

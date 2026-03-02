@@ -4,13 +4,17 @@
     <h5 class="card-title"><%= link_to item.name, [parent, item].compact %></h5>
     <p class="card-text"><%= short_description %></p>
     <% if can_edit %>
-        <%= link_to "Edit", [:edit, parent, item] %>
+        <%= link_to [:edit, parent, item] do %>
+            <i class="fa-solid fa-pen-to-square"></i> Edit
+        <% end %>
     <% end %>
     <% if can_delete %>
-        <%= button_to "Delete", [parent, item],
+        <%= button_to [parent, item],
           method: :delete,
           data: { turbo_confirm: "Are you sure?" },
-          class: "btn btn-sm btn-danger" %>
+          class: "btn btn-sm btn-danger" do %>
+            <i class="fa-solid fa-trash"></i> Delete
+        <% end %>
     <% end %>
   </div>
 </div>

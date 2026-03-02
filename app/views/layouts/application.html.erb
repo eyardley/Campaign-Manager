@@ -12,6 +12,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 
+    <script src="https://kit.fontawesome.com/ca17848b24.js" crossorigin="anonymous"></script>
+
     <%= yield :head %>
 
     <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
@@ -33,7 +35,9 @@
                 <%= link_to "Campaign Manager", root_path, class: "navbar-brand" %>
                 <div class="d-flex">
                 <% if authenticated? %>
-                    <%= button_to "Log out", session_path, method: :delete, class: "btn btn-outline-light btn-sm" %>
+                    <%= button_to session_path, method: :delete, class: "btn btn-outline-light btn-sm" do %>
+                        <i class="fa-solid fa-right-from-bracket"></i> Log out
+                    <% end %>
                 <% end %>
                 </div>
             </div>

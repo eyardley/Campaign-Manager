@@ -22,8 +22,17 @@ body .container#content {
     margin-bottom: 1.5rem;
 }
 
+nav {
+    border-radius: 0.5rem;
+}
+
 label {
     font-weight: bold;
+}
+
+.img-fluid {
+    max-height: 350px;
+    object-fit: cover;
 }
 
 .box {

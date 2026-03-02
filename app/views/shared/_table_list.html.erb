@@ -4,7 +4,9 @@
     </div>
     <% if can_edit %>
         <div class="col-auto mt-3">
-            <%= link_to "New #{table_title.singularize}", new_path %>
+            <%= link_to new_path do %>
+                <i class="fa-solid fa-plus"></i> New <%= table_title.singularize %>
+            <% end %>
         </div>
     <% end %>
 </div>
@@ -26,7 +28,11 @@
                                 <td><%= link_to item.name, [parent, item].compact %></td>
                                 <% if can_edit %>
                                     <td class="text-end">
-                                        <%= link_to "Edit", [:edit, parent, item] %>
+
+                                            <%= link_to [:edit, parent, item] do %>
+                                                <i class="fa-solid fa-pen-to-square"></i>
+                                            <% end %>
+
                                     </td>
                                 <% end %>
                             </tr>

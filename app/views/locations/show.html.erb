@@ -1,4 +1,4 @@
-<div><%= link_to "Back", @campaign %></div>
+<div><%= link_to @campaign do %><i class="fa-solid fa-arrow-left"></i> Back<% end %></div>
 
 <h1 class="text-center mb-4"><%= @location.name %></h1>
 
@@ -47,7 +47,11 @@
 
 <% if @is_game_master %>
     <div>
-        <%= link_to "Edit", edit_campaign_location_path(@campaign, @location) %>
-        <%= button_to "Delete", [@campaign, @location], method: :delete, data: { turbo_confirm: "Are you sure?" } %>
+        <%= link_to edit_campaign_location_path(@campaign, @location) do %>
+            <i class="fa-solid fa-pen-to-square"></i> Edit
+        <% end %>
+        <%= button_to [@campaign, @location], method: :delete, data: { turbo_confirm: "Are you sure?" } do %>
+            <i class="fa-solid fa-trash"></i> Delete
+        <% end %>
     </div>
 <% end %>

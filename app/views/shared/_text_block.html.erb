@@ -4,7 +4,9 @@
     </div>
     <% if can_edit %>
         <div class="col-auto mt-3">
-            <%= link_to "Edit", edit_path %>
+            <%= link_to edit_path do %>
+                <i class="fa-solid fa-pen-to-square"></i>
+            <% end %>
         </div>
     <% end %>
 </div>
