@@ -3,6 +3,7 @@ module Relatable
   included do
     has_many :source_relations, as: :source, class_name: "Relation", dependent: :destroy
     has_many :target_relations, as: :target, class_name: "Relation", dependent: :destroy
+    after_save :flush_pending_relations
   end
 
   def related_records
@@ -19,6 +20,19 @@ module Relatable
   private
 
   def sync_relations(model_class, ids)
+    @pending_relations ||= {}
+    @pending_relations[model_class] = ids
+  end
+
+  def flush_pending_relations
+    return unless @pending_relations
+    @pending_relations.each do |model_class, ids|
+      apply_sync_relations(model_class, ids)
+    end
+    @pending_relations = nil
+  end
+
+  def apply_sync_relations(model_class, ids)
     ids = ids.reject(&:blank?).map(&:to_i)
     current_ids = related(model_class).map(&:id)
 
