@@ -1,6 +1,9 @@
 class CharacterSheetsController < ApplicationController
+  include PlayerCharacterAuthorization
+
   before_action :set_campaign
   before_action :set_pc
+  before_action :require_pc_belongs_to_user
   before_action :set_sheet, only: %i[ edit update destroy ]
 
   def new

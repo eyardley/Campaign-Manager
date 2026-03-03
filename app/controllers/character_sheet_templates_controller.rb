@@ -1,5 +1,8 @@
 class CharacterSheetTemplatesController < ApplicationController
+    include CampaignAuthorization
+
     before_action :set_campaign
+    before_action :require_game_master
     before_action :set_template, only: %i[ show edit update destroy ]
 
     def new
@@ -33,7 +36,6 @@ class CharacterSheetTemplatesController < ApplicationController
 
     def set_campaign
         @campaign = Campaign.find(params[:campaign_id])
-        @is_game_master = @campaign.game_master_id == Current.user.id
     end
 
     def set_template

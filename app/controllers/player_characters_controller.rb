@@ -1,10 +1,12 @@
 class PlayerCharactersController < ApplicationController
-    before_action :set_campaign, only: %i[ show new create edit update destroy]
-    before_action :set_pc, only: %i[ show edit update destroy]
+    include CampaignAuthorization
+    include PlayerCharacterAuthorization
 
-    def show
-      @sheet = @pc.character_sheet
-    end
+    before_action :set_campaign
+    before_action :require_user_belongs_to_campaign , only: %i[ new create show ]
+    before_action :set_pc, only: %i[ show edit update destroy]
+    before_action :set_pc_belongs_to_user, only: %i[ show ]
+    before_action :require_pc_belongs_to_user, only: %i[ edit update destroy ]
 
     def new
         @pc = PlayerCharacter.new
@@ -20,6 +22,10 @@ class PlayerCharactersController < ApplicationController
         else
             render :new, status: :unprocessable_entity
         end
+    end
+
+    def show
+      @sheet = @pc.character_sheet
     end
 
     def edit

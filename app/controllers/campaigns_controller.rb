@@ -1,14 +1,10 @@
 class CampaignsController < ApplicationController
-    before_action :set_campaign, only: %i[ show edit update destroy]
-    before_action :validate_user, only: %i[ show ]
-    before_action :validate_game_master, only: %i[ edit update destroy ]
+    include CampaignAuthorization
 
-    def index
-        @campaigns = Current.user.campaigns.all
-    end
-
-    def show
-    end
+    before_action :set_campaign, except: %i[ new create ]
+    before_action :set_is_game_master, only: %i[ show ]
+    before_action :require_user_belongs_to_campaign , only: %i[ show ]
+    before_action :require_game_master, only: %i[ edit update destroy ]
 
     def new
         @campaign = Campaign.new
@@ -23,9 +19,6 @@ class CampaignsController < ApplicationController
         else
             render :new, status: :unprocessable_entity
         end
-    end
-
-    def edit
     end
 
     def update
@@ -46,25 +39,7 @@ class CampaignsController < ApplicationController
 
     def set_campaign
         @campaign = Campaign.find(params[:id])
-        @is_game_master = @campaign.game_master_id == Current.user.id
-        print @is_game_master
     end
-
-    def validate_user
-        @campaign = Campaign.find(params[:id])
-        if !@campaign.users.include? Current.user
-            redirect_to campaigns_path
-        end
-        @is_game_master = @campaign.game_master_id == Current.user.id
-    end
-
-    def validate_game_master
-        @campaign = Campaign.find(params[:id])
-        if @campaign.game_master_id != Current.user.id
-            redirect_to campaigns_path
-        end
-    end
-
 
     def campaign_params
         params.expect(campaign: [:name, :description, :notes, :featured_image])

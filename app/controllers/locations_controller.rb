@@ -1,5 +1,10 @@
 class LocationsController < ApplicationController
+    include CampaignAuthorization
+
     before_action :set_campaign
+    before_action :set_is_game_master, only: %i[ show ]
+    before_action :require_user_belongs_to_campaign , only: %i[ show ]
+    before_action :require_game_master, only: %i[ new create edit update destroy ]
     before_action :set_location, only: %i[ show edit update destroy ]
 
     def show
@@ -41,7 +46,6 @@ class LocationsController < ApplicationController
 
     def set_campaign
         @campaign = Campaign.find(params[:campaign_id])
-        @is_game_master = @campaign.game_master_id == Current.user.id
     end
 
     def set_location

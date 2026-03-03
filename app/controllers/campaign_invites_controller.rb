@@ -1,5 +1,8 @@
 class CampaignInvitesController < ApplicationController
+  include CampaignAuthorization
+
   before_action :set_campaign
+  before_action :require_game_master, only: %i[ new create destroy ]
   before_action :set_invite, only: %i[ update destroy ]
 
   def new
