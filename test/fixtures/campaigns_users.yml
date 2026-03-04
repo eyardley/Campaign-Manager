@@ -1,0 +1,16 @@
+# HABTM join table — no model, so we use identify() to get the fixture IDs
+
+# user one is game master and member of campaign one
+one_one:
+  campaign_id: <%= ActiveRecord::FixtureSet.identify(:one) %>
+  user_id: <%= ActiveRecord::FixtureSet.identify(:one) %>
+
+# user two is a player in campaign one
+one_two:
+  campaign_id: <%= ActiveRecord::FixtureSet.identify(:one) %>
+  user_id: <%= ActiveRecord::FixtureSet.identify(:two) %>
+
+# user two is game master and member of campaign two
+two_two:
+  campaign_id: <%= ActiveRecord::FixtureSet.identify(:two) %>
+  user_id: <%= ActiveRecord::FixtureSet.identify(:two) %>

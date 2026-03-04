@@ -1,0 +1,4 @@
+one:
+  player_character: one
+  character_sheet_template: one
+  data: '{"strength": {"type": "number", "value": "10"}, "dexterity": {"type": "number", "value": "8"}}'

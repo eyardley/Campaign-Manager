@@ -64,15 +64,15 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_01_021113) do
 
   create_table "campaigns", force: :cascade do |t|
     t.datetime "created_at", null: false
-    t.integer "game_master_id"
+    t.bigint "game_master_id"
     t.string "name"
     t.datetime "updated_at", null: false
     t.index ["game_master_id"], name: "index_campaigns_on_game_master_id"
   end
 
   create_table "campaigns_users", id: false, force: :cascade do |t|
-    t.integer "campaign_id", null: false
-    t.integer "user_id", null: false
+    t.bigint "campaign_id", null: false
+    t.bigint "user_id", null: false
   end
 
   create_table "character_sheet_templates", force: :cascade do |t|
@@ -97,17 +97,17 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_01_021113) do
 
   create_table "friendships", force: :cascade do |t|
     t.datetime "created_at", null: false
-    t.integer "friend_id", null: false
+    t.bigint "friend_id", null: false
     t.string "status", default: "pending", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.index ["friend_id"], name: "index_friendships_on_friend_id"
     t.index ["user_id", "friend_id"], name: "index_friendships_on_user_id_and_friend_id", unique: true
     t.index ["user_id"], name: "index_friendships_on_user_id"
   end
 
   create_table "locations", force: :cascade do |t|
-    t.integer "campaign_id", null: false
+    t.bigint "campaign_id", null: false
     t.datetime "created_at", null: false
     t.string "name"
     t.datetime "updated_at", null: false
@@ -115,7 +115,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_01_021113) do
   end
 
   create_table "non_player_characters", force: :cascade do |t|
-    t.integer "campaign_id", null: false
+    t.bigint "campaign_id", null: false
     t.datetime "created_at", null: false
     t.string "name"
     t.datetime "updated_at", null: false
@@ -123,20 +123,20 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_01_021113) do
   end
 
   create_table "player_characters", force: :cascade do |t|
-    t.integer "campaign_id", null: false
+    t.bigint "campaign_id", null: false
     t.datetime "created_at", null: false
     t.string "name"
     t.datetime "updated_at", null: false
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.index ["campaign_id"], name: "index_player_characters_on_campaign_id"
     t.index ["user_id"], name: "index_player_characters_on_user_id"
   end
 
   create_table "relations", force: :cascade do |t|
     t.datetime "created_at", null: false
-    t.integer "source_id", null: false
+    t.bigint "source_id", null: false
     t.string "source_type", null: false
-    t.integer "target_id", null: false
+    t.bigint "target_id", null: false
     t.string "target_type", null: false
     t.datetime "updated_at", null: false
     t.index ["source_type", "source_id", "target_type", "target_id"], name: "index_relations_uniqueness", unique: true
@@ -149,7 +149,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_01_021113) do
     t.string "ip_address"
     t.datetime "updated_at", null: false
     t.string "user_agent"
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.index ["user_id"], name: "index_sessions_on_user_id"
   end
 

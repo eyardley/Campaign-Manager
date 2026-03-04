@@ -1,0 +1,11 @@
+# accepted: user one and user two are friends
+accepted:
+  user: one
+  friend: two
+  status: accepted
+
+# pending: user three sent a friend request to user one
+pending:
+  user: three
+  friend: one
+  status: pending

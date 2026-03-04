@@ -1,7 +1,10 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# Campaign one: game master = user one, members = [user one, user two]
+# Campaign two: game master = user two, members = [user two]
 
 one:
-  name: MyString
+  name: Campaign One
+  game_master: one
 
 two:
-  name: MyString
+  name: Campaign Two
+  game_master: two

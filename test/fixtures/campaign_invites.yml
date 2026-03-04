@@ -1,11 +1,11 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# pending: user two invited to campaign one (not yet accepted)
+pending:
+  campaign: one
+  user: two
+  status: pending
 
-one:
-  Campaign: one
-  User: one
-  status: MyString
-
-two:
-  Campaign: two
-  User: two
-  status: MyString
+# accepted: user one invited to campaign two (already accepted)
+accepted:
+  campaign: two
+  user: one
+  status: accepted

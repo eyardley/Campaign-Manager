@@ -1,0 +1,5 @@
+one:
+  campaign: one
+  name: Basic Template
+  sheet_type: custom
+  data: '{"strength": "number", "dexterity": "number", "hit_points": "number"}'

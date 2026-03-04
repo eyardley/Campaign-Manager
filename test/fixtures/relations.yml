@@ -1,0 +1,9 @@
+# NPC one related to NPC two (both in different campaigns — the app doesn't enforce same-campaign)
+npc_to_npc:
+  source: one (NonPlayerCharacter)
+  target: two (NonPlayerCharacter)
+
+# NPC one related to Location one
+npc_to_location:
+  source: one (NonPlayerCharacter)
+  target: one (Location)
